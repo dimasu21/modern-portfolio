@@ -46,7 +46,7 @@ const projects = [
     src: portfolioImg,
     color: "#8b5cf6", // Purple
     githubLink: "https://github.com/username/my-portfolio",
-    liveLink: "https://dimas-portfolio.com",
+    liveLink: "https://dimastrim.netlify.app/",
   },
 ];
 
