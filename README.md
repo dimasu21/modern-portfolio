@@ -124,7 +124,7 @@ The portfolio website consists of the following sections:
 - **Styling:** Tailwind CSS
 - **Animations:** Framer Motion
 - **Icons:** React Icons
-- **Deployment:** Vercel
+- **Deployment:** netfly.app
 
 ---
 
