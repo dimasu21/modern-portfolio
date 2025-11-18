@@ -45,7 +45,7 @@ const projects = [
       "A modern portfolio website built with React, Tailwind CSS, and Framer Motion, featuring smooth animations and a fully responsive design.",
     src: portfolioImg,
     color: "#8b5cf6", // Purple
-    githubLink: "https://github.com/username/my-portfolio",
+    githubLink: "https://github.com/DimasTriM/modern-portfolio.git",
     liveLink: "https://dimastrim.netlify.app/",
   },
 ];
