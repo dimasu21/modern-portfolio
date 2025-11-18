@@ -92,13 +92,15 @@ export default function Contact() {
       } else {
         setStatus({
           type: "error",
-          message: result.message || "Terjadi kesalahan saat mengirim pesan.",
+          message:
+            result.message ||
+            "An error occurred while sending the message. Please try again.",
         });
       }
     } catch (error) {
       setStatus({
         type: "error",
-        message: "Terjadi kesalahan. Silakan coba lagi.",
+        message: "An error occurred Please try again.",
       });
       console.error("Error:", error);
     } finally {
@@ -239,7 +241,7 @@ export default function Contact() {
                   disabled={isSubmitting}
                   className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-3 px-6 rounded-lg font-semibold flex items-center justify-center space-x-2 hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <span>{isSubmitting ? "Mengirim..." : "Kirim Pesan"}</span>
+                  <span>{isSubmitting ? "Sending..." : "Send"}</span>
                   <Send className="w-4 h-4" />
                 </button>
               </form>
