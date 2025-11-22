@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Send, Mail, MapPin, CheckCircle, AlertCircle } from "lucide-react";
+import GridBackground from "@/components/GridBackground";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -109,8 +110,9 @@ export default function Contact() {
   };
 
   return (
-    <main className="pt-20 lg:pt-0 bg-[#04081A] text-white min-h-screen">
-      <section className="hero min-h-screen flex items-center relative px-4 sm:px-6 lg:px-8">
+    <main className="pt-20 lg:pt-0 bg-[#04081A] text-white min-h-screen relative overflow-hidden">
+      <GridBackground />
+      <section className="hero min-h-screen flex items-center relative px-4 sm:px-6 lg:px-8 z-10">
         <div className="container mx-auto max-w-6xl">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Contact Info */}

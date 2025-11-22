@@ -11,6 +11,7 @@ import {
   ArrowUpRight, // Icon panah untuk tombol
 } from "lucide-react";
 import { motion } from "framer-motion";
+import GridBackground from "@/components/GridBackground";
 
 const CertificateSection = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -104,7 +105,7 @@ const CertificateSection = () => {
     <section className="min-h-screen relative overflow-hidden py-20 bg-[#04081A]">
       {/* Grid Background */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-grid-white/[0.05] bg-[length:50px_50px]" />
+        <GridBackground />
         <div className="absolute inset-0 bg-gradient-to-t from-[#04081A] via-transparent to-[#04081A]" />
       </div>
 

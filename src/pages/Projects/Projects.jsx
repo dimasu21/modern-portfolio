@@ -3,6 +3,7 @@ import { useTransform, motion, useScroll } from "framer-motion";
 import { useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Github, Globe } from "lucide-react";
+import GridBackground from "@/components/GridBackground";
 
 // --- ASSETS IMPORT ---
 import houseImg from "../../assets/images/pratinjau.png";
@@ -106,8 +107,9 @@ export default function Projects() {
 
   return (
     <ReactLenis root>
-      <main className="bg-[#04081A]" ref={container}>
-        <section className="text-white w-full bg-[#04081A]">
+      <main className="bg-[#04081A] relative" ref={container}>
+        <GridBackground />
+        <section className="text-white w-full relative z-10">
           {/* Header Section */}
           <div className="pt-24 text-center pb-2 px-4">
             <motion.div
