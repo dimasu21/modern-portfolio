@@ -6,16 +6,15 @@ import { BsWhatsapp } from "react-icons/bs";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
-  // Data sosmed dipisah biar kodingan di bawah rapi
   const socialLinks = [
     {
       name: "GitHub",
-      href: "https://github.com/DimasTriM", // Ganti link GitHub kamu
+      href: "https://github.com/dimasu21",
       icon: Github,
     },
     {
       name: "LinkedIn",
-      href: "https://www.linkedin.com/in/dimas-tri-mulyo", // Ganti link LinkedIn kamu
+      href: "https://www.linkedin.com/in/dimas-tri-mulyo-1283a5392/",
       icon: Linkedin,
     },
     {
