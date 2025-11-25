@@ -54,8 +54,9 @@ export default function Header() {
           <nav className="bg-gray-900/90 backdrop-blur-md md:rounded-full px-4 md:px-6 py-2.5">
             {/* Mobile Menu Button */}
             <div className="flex justify-between items-center md:hidden px-2">
-              <Link to="/" className="text-white font-bold">
-                Portfolio
+              <Link to="/" className="flex items-center gap-2">
+                <img src="/src/assets/icons/D logo.svg" alt="Logo" className="h-8 w-8" />
+                <span className="text-white font-bold text-lg">Dimas Tri M</span>
               </Link>
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -68,6 +69,7 @@ export default function Header() {
             {/* Navigation Links */}
             <div className={`${isMenuOpen ? "block" : "hidden"} md:block`}>
               <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-1 lg:gap-2 py-4 md:py-0">
+
                 {navLinks.map(({ id, icon: Icon, text, path }) => (
                   <Link
                     key={id}
