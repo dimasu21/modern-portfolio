@@ -19,7 +19,7 @@ const GitHubStats = ({ username = "dimasu21" }) => {
           className="transform hover:scale-105 transition-transform duration-300"
         >
           <img
-            src={`https://github-readme-stats.vercel.app/api?username=${username}&show_icons=true&theme=${theme}&hide_border=true&bg_color=0d1117`}
+            src={`https://github-readme-stats-theta-hazel.vercel.app/api?username=${username}&show_icons=true&theme=${theme}&hide_border=true&bg_color=0d1117`}
             alt="GitHub Stats"
             className="rounded-lg"
             loading="lazy"
@@ -34,7 +34,7 @@ const GitHubStats = ({ username = "dimasu21" }) => {
           className="transform hover:scale-105 transition-transform duration-300"
         >
           <img
-            src={`https://github-readme-stats.vercel.app/api/top-langs/?username=${username}&layout=compact&theme=${theme}&hide_border=true&bg_color=0d1117`}
+            src={`https://github-readme-stats-theta-hazel.vercel.app/api/top-langs/?username=${username}&layout=compact&theme=${theme}&hide_border=true&bg_color=0d1117`}
             alt="Top Languages"
             className="rounded-lg"
             loading="lazy"
