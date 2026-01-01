@@ -154,10 +154,10 @@ You will need to download **Git** and **Node** to run this project.
 Follow these steps to run the project locally on your machine.
 
 ### 1. Clone the Repository
+
 Open your terminal and run the following command to clone the repo:
 
 git clone [https://github.com/DimasTriM/portfolio-main.git](https://github.com/DimasTriM/portfolio-main.git)
-
 
 ```bash
 cd portfolio-main
@@ -186,5 +186,3 @@ Open your browser and visit http://localhost:5173/ to see the result! 🎉
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 ---
-
-<div align="center"> Made with ❤️ by Dimas Tri Mulyo </div>
