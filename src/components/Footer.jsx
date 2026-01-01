@@ -6,7 +6,6 @@ import { useTranslation } from "react-i18next";
 import VisitCounter from "./VisitCounter";
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
   const { t } = useTranslation();
 
   const socialLinks = [
@@ -25,42 +24,79 @@ const Footer = () => {
       href: "https://wa.me/qr/CMB7MS5HTX2VB1",
       icon: BsWhatsapp,
     },
+    {
+      name: "Email",
+      href: "mailto:dimastry21@gmail.com",
+      icon: Mail,
+    },
+  ];
+
+  const navLinks = [
+    { name: t("nav.about"), href: "#about" },
+    { name: t("nav.experience"), href: "#experience" },
+    { name: t("nav.projects"), href: "#projects" },
+    { name: t("nav.certificates"), href: "#certificates" },
+    { name: t("nav.guestbook"), href: "#guestbook" },
+    { name: t("nav.contact"), href: "#contact" },
   ];
 
   return (
-    <footer className="bg-[#0B1121] text-gray-400 py-10 md:py-16 border-t border-gray-800">
+    <footer className="bg-black text-white py-12 md:py-16">
       <div className="container mx-auto px-6 max-w-7xl">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-0">
-          {/* Left Section: Copyright & Visit Counter */}
-          <div className="text-center md:text-left">
-            <p className="text-sm font-medium text-gray-300">
-              &copy; {currentYear} Dimas Tri Mulyo. {t("footer.rights")}
-            </p>
-            <div className="mt-3">
-              <VisitCounter />
-            </div>
-          </div>
-
-          {/* Right Section: Social Icons */}
-          <div className="flex gap-6 items-center">
-            {socialLinks.map((social) => (
-              <motion.a
-                key={social.name}
-                href={social.href}
-                target={social.name !== "Email" ? "_blank" : undefined}
-                rel={
-                  social.name !== "Email" ? "noopener noreferrer" : undefined
-                }
-                className="p-2 bg-gray-800/50 rounded-lg text-gray-400 hover:text-teal-400 hover:bg-gray-800 transition-all duration-300 border border-transparent hover:border-teal-500/30"
-                whileHover={{ scale: 1.1, y: -3 }}
-                whileTap={{ scale: 0.95 }}
-                aria-label={social.name}
-              >
-                <social.icon size={20} />
-              </motion.a>
-            ))}
-          </div>
+        {/* Logo/Name Section */}
+        <div className="mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-wide">
+            DIMAS TRI MULYO
+          </h2>
         </div>
+
+        {/* Social Icons - Circular Style */}
+        <div className="flex gap-4 mb-10">
+          {socialLinks.map((social) => (
+            <motion.a
+              key={social.name}
+              href={social.href}
+              target={social.name !== "Email" ? "_blank" : undefined}
+              rel={social.name !== "Email" ? "noopener noreferrer" : undefined}
+              className="w-10 h-10 rounded-full border border-white flex items-center justify-center text-white hover:bg-white hover:text-black transition-all duration-300"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              aria-label={social.name}
+            >
+              <social.icon size={18} />
+            </motion.a>
+          ))}
+        </div>
+
+        {/* Divider */}
+        <div className="border-t border-gray-800 my-8"></div>
+
+        {/* Navigation Links */}
+        <div className="flex flex-wrap justify-start gap-x-2 gap-y-3 mb-8">
+          {navLinks.map((link, index) => (
+            <React.Fragment key={link.name}>
+              <a
+                href={link.href}
+                className="text-xs md:text-sm text-gray-400 hover:text-white transition-colors duration-300 uppercase tracking-wider"
+              >
+                {link.name}
+              </a>
+              {index < navLinks.length - 1 && (
+                <span className="text-gray-600">|</span>
+              )}
+            </React.Fragment>
+          ))}
+        </div>
+
+        {/* Visit Counter */}
+        <div className="mb-6">
+          <VisitCounter />
+        </div>
+
+        {/* Copyright */}
+        <p className="text-xs text-gray-500">
+          © 2024 - 2026 Dimas Tri Mulyo. {t("footer.rights")}
+        </p>
       </div>
     </footer>
   );

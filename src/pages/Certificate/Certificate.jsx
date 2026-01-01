@@ -202,7 +202,7 @@ const CertificateSection = () => {
                   href={cert.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full block text-center bg-gray-800 hover:bg-teal-500 hover:text-white text-teal-400 py-2 rounded-lg transition-all duration-300 text-sm font-semibold flex items-center justify-center gap-2 border border-gray-700 hover:border-teal-500"
+                  className="w-full text-center bg-gray-800 hover:bg-teal-500 hover:text-white text-teal-400 py-2 rounded-lg transition-all duration-300 text-sm font-semibold flex items-center justify-center gap-2 border border-gray-700 hover:border-teal-500"
                 >
                   <ExternalLink size={14} />
                   View Certificate
