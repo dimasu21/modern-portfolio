@@ -92,7 +92,7 @@
     }
   },
   "service": {
-    "title": "My",
+    "title": "",
     "titleHighlight": "Services",
     "subtitle": "I offer a range of services to help you bring your ideas to life, from web development to AI-powered solutions.",
     "label": "Service",
@@ -151,7 +151,8 @@
     "signInGoogle": "Sign in with Google",
     "signInGithub": "Sign in with GitHub",
     "signedInAs": "Signed in as",
-    "signOut": "Sign out"
+    "signOut": "Sign out",
+    "signInToComment": "Sign in to comment"
   },
   "footer": {
     "rights": "All rights reserved.",

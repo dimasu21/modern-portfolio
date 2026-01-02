@@ -92,8 +92,8 @@
     }
   },
   "service": {
-    "title": "Layanan",
-    "titleHighlight": "Saya",
+    "title": "",
+    "titleHighlight": "Layanan",
     "subtitle": "Saya menawarkan berbagai layanan untuk membantu mewujudkan ide Anda, mulai dari pengembangan web hingga solusi bertenaga AI.",
     "label": "Layanan",
     "webDev": {
@@ -151,7 +151,8 @@
     "signInGoogle": "Masuk dengan Google",
     "signInGithub": "Masuk dengan GitHub",
     "signedInAs": "Masuk sebagai",
-    "signOut": "Keluar"
+    "signOut": "Keluar",
+    "signInToComment": "Masuk untuk berkomentar"
   },
   "footer": {
     "rights": "Hak cipta dilindungi.",

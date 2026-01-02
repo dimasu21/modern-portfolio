@@ -75,11 +75,16 @@ const Guestbook = () => {
   const fetchMessages = async () => {
     setIsLoading(true);
     try {
-      const { data, error } = await supabase
-        .from("guestbook")
-        .select("*")
-        .order("created_at", { ascending: false });
+      // Fetch messages and add minimum 2 second delay to show loading animation
+      const [result] = await Promise.all([
+        supabase
+          .from("guestbook")
+          .select("*")
+          .order("created_at", { ascending: false }),
+        new Promise(resolve => setTimeout(resolve, 2000)) // 2 second minimum
+      ]);
 
+      const { data, error } = result;
       if (error) throw error;
       setMessages(data || []);
     } catch (error) {
@@ -304,8 +309,14 @@ const Guestbook = () => {
           className="space-y-6 mb-8"
         >
           {isLoading ? (
-            <div className="flex items-center justify-center py-12">
-              <Loader2 className="w-8 h-8 animate-spin text-gray-400" />
+            <div className="flex flex-col items-center justify-center py-16 bg-[#0a1628] rounded-2xl border border-gray-800">
+              {/* Cute Loading Icon - Octocat style */}
+              <div className="mb-4 text-gray-500">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor" className="animate-bounce">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-4-8c.79 0 1.5-.71 1.5-1.5S8.79 9 8 9s-1.5.71-1.5 1.5S7.21 12 8 12zm8 0c.79 0 1.5-.71 1.5-1.5S16.79 9 16 9s-1.5.71-1.5 1.5.71 1.5 1.5 1.5zm-4 4c2.21 0 4-1.79 4-4h-8c0 2.21 1.79 4 4 4z"/>
+                </svg>
+              </div>
+              <p className="text-gray-500 text-sm">Loading comments...</p>
             </div>
           ) : messages.length === 0 ? (
             <div className="text-center py-12 text-gray-500">
@@ -367,7 +378,8 @@ const Guestbook = () => {
           )}
         </motion.div>
 
-        {/* Bottom Section - Sign In or Message Input */}
+        {/* Bottom Section - Sign In or Message Input - Hidden while loading */}
+        {!isLoading && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -417,30 +429,45 @@ const Guestbook = () => {
               </div>
             </form>
           ) : (
-            /* Sign In Section for guests */
-            <div className="text-center">
-              <p className="text-gray-400 mb-6">
-                {t("guestbook.signInPrompt")}
-              </p>
-              <div className="flex items-center justify-center gap-4 flex-wrap">
+            /* Sign In Section for guests - GitHub style */
+            <div className="bg-[#0a1628] border border-gray-800 rounded-xl overflow-hidden">
+              {/* Header */}
+              <div className="flex items-center justify-between border-b border-gray-800 px-4">
+                <span className="px-4 py-3 text-sm font-medium text-white">
+                  Write a message
+                </span>
+              </div>
+              
+              {/* Textarea Area */}
+              <div className="p-4">
+                <textarea
+                  disabled
+                  placeholder={t("guestbook.signInToComment") || "Sign in to comment"}
+                  className="w-full h-32 bg-transparent text-gray-500 placeholder-gray-600 resize-none focus:outline-none cursor-not-allowed"
+                />
+              </div>
+              
+              {/* Footer with Sign In Buttons */}
+              <div className="flex justify-end gap-3 p-4 border-t border-gray-800">
                 <button
                   onClick={signInWithGoogle}
-                  className="flex items-center gap-3 px-6 py-3 bg-[#0a1628] border border-gray-700 rounded-full text-white hover:bg-[#0d1f35] hover:border-gray-600 transition-all"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-white hover:bg-gray-100 text-gray-800 text-sm font-medium rounded-lg transition-colors"
                 >
-                  <FaGoogle className="w-5 h-5" />
-                  <span>{t("guestbook.signInGoogle")}</span>
+                  <FaGoogle className="w-4 h-4" />
+                  <span>Sign in with Google</span>
                 </button>
                 <button
                   onClick={signInWithGithub}
-                  className="flex items-center gap-3 px-6 py-3 bg-[#0a1628] border border-gray-700 rounded-full text-white hover:bg-[#0d1f35] hover:border-gray-600 transition-all"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-[#238636] hover:bg-[#2ea043] text-white text-sm font-medium rounded-lg transition-colors"
                 >
-                  <FaGithub className="w-5 h-5" />
-                  <span>{t("guestbook.signInGithub")}</span>
+                  <FaGithub className="w-4 h-4" />
+                  <span>Sign in with GitHub</span>
                 </button>
               </div>
             </div>
           )}
         </motion.div>
+        )}
       </div>
     </section>
   );
