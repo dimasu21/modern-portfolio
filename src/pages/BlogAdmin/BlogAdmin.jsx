@@ -20,7 +20,6 @@ ReactQuill.Quill.register(DividerBlot);
 
 export default function BlogAdmin() {
   const { user, signInWithGoogle, signInWithGithub, signOut, loading: authLoading } = useAuth();
-  // ... (state remains)
   const [isAdmin, setIsAdmin] = useState(false);
   const [checkingAdmin, setCheckingAdmin] = useState(true);
   const [posts, setPosts] = useState([]);
@@ -39,13 +38,143 @@ export default function BlogAdmin() {
   const [isSaving, setIsSaving] = useState(false);
   const quillRef = useRef(null);
 
-  // ... (useEffects remain)
+  // Check if user is admin
+  useEffect(() => {
+    const checkAdminStatus = async () => {
+      if (!user) {
+        setIsAdmin(false);
+        setCheckingAdmin(false);
+        return;
+      }
 
-  // ... (fetchPosts, generateSlug, handleTitleChange, resetForm, handleEdit remain)
+      try {
+        const { data, error } = await supabase
+          .from("admins")
+          .select("email")
+          .eq("email", user.email)
+          .single();
 
-  // ... (imageHandler remains)
+        if (error || !data) {
+          setIsAdmin(false);
+        } else {
+          setIsAdmin(true);
+        }
+      } catch (error) {
+        setIsAdmin(false);
+      } finally {
+        setCheckingAdmin(false);
+      }
+    };
 
-  // Insert Page Break (Improved to prevent scroll jump)
+    if (!authLoading) {
+      checkAdminStatus();
+    }
+  }, [user, authLoading]);
+
+  // Fetch posts when admin
+  useEffect(() => {
+    if (isAdmin) {
+      fetchPosts();
+    }
+  }, [isAdmin]);
+
+  const fetchPosts = async () => {
+    setIsLoading(true);
+    try {
+      const { data, error } = await supabase
+        .from("blog_posts")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (error) throw error;
+      setPosts(data || []);
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const generateSlug = (title) => {
+    return title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "");
+  };
+
+  const handleTitleChange = (e) => {
+    const title = e.target.value;
+    setFormData({
+      ...formData,
+      title,
+      slug: currentPost ? formData.slug : generateSlug(title),
+    });
+  };
+
+  const resetForm = () => {
+    setFormData({
+      title: "",
+      slug: "",
+      content: "",
+      excerpt: "",
+      published: false,
+      created_at: "",
+      tags: "",
+    });
+    setCurrentPost(null);
+    setIsEditing(false);
+  };
+
+  const handleEdit = (post) => {
+    setCurrentPost(post);
+    setFormData({
+      title: post.title,
+      slug: post.slug,
+      content: post.content,
+      excerpt: post.excerpt || "",
+      published: post.published,
+      created_at: post.created_at ? new Date(post.created_at).toISOString().slice(0, 16) : "",
+      tags: post.tags ? post.tags.join(", ") : "",
+    });
+    setIsEditing(true);
+  };
+
+  const imageHandler = () => {
+    const input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "image/*");
+    input.click();
+
+    input.onchange = async () => {
+      const file = input.files[0];
+      if (file) {
+        try {
+          const fileExt = file.name.split(".").pop();
+          const fileName = `${Math.random()}.${fileExt}`;
+          const filePath = `${fileName}`;
+
+          const { error: uploadError } = await supabase.storage
+            .from("blog-images")
+            .upload(filePath, file);
+
+          if (uploadError) throw uploadError;
+
+          const { data } = supabase.storage
+            .from("blog-images")
+            .getPublicUrl(filePath);
+
+          const quill = quillRef.current.getEditor();
+          const range = quill.getSelection(true);
+          quill.insertEmbed(range.index, "image", data.publicUrl);
+        } catch (error) {
+          console.error("Error uploading image:", error);
+          alert("Failed to upload image");
+        }
+      }
+    };
+  };
+
+  // Insert Page Break
   const insertPageBreak = () => {
     const quill = quillRef.current.getEditor();
     const range = quill.getSelection(true);
@@ -67,10 +196,10 @@ export default function BlogAdmin() {
       toolbar: {
         container: [
           [{ header: [1, 2, 3, false] }],
-          [{ size: ["small", false, "large", "huge"] }], // Font size
+          [{ size: ["small", false, "large", "huge"] }],
           ["bold", "italic", "underline", "strike", "blockquote"],
           [{ list: "ordered" }, { list: "bullet" }],
-          [{ align: [] }], // Text alignment
+          [{ align: [] }],
           ["link", "image"],
           ["clean"],
         ],
@@ -102,7 +231,7 @@ export default function BlogAdmin() {
             published: formData.published,
             updated_at: new Date().toISOString(),
             created_at: formData.created_at ? new Date(formData.created_at).toISOString() : currentPost.created_at,
-            tags: formData.tags.split(",").map(t => t.trim()).filter(Boolean), // String to Array
+            tags: formData.tags.split(",").map(t => t.trim()).filter(Boolean),
           })
           .eq("id", currentPost.id);
 
@@ -116,7 +245,7 @@ export default function BlogAdmin() {
             excerpt: formData.excerpt,
             published: formData.published,
             created_at: formData.created_at ? new Date(formData.created_at).toISOString() : new Date().toISOString(),
-            tags: formData.tags.split(",").map(t => t.trim()).filter(Boolean), // String to Array
+            tags: formData.tags.split(",").map(t => t.trim()).filter(Boolean),
           },
         ]);
 
@@ -167,8 +296,6 @@ export default function BlogAdmin() {
       day: "numeric",
     });
   };
-
-  // ... (Login & Loading UI code remains same, updated Editor below)
 
   if (authLoading || checkingAdmin) {
     return (
@@ -363,22 +490,24 @@ export default function BlogAdmin() {
 
               <div className="flex justify-between items-end mb-2">
                 <label className="block text-sm text-gray-400">Content</label>
-                <button
-                  type="button"
-                  onClick={insertPageBreak}
-                  className="text-xs flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
-                >
-                  <SplitSquareHorizontal size={14} />
-                  Insert Page Break
-                </button>
-                <button
-                  type="button"
-                  onClick={insertDivider}
-                  className="text-xs flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors ml-4"
-                >
-                  <Minus size={14} />
-                  Insert Divider
-                </button>
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={insertPageBreak}
+                    className="text-xs flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                  >
+                    <SplitSquareHorizontal size={14} />
+                    Page Break
+                  </button>
+                  <button
+                    type="button"
+                    onClick={insertDivider}
+                    className="text-xs flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                  >
+                    <Minus size={14} />
+                    Divider
+                  </button>
+                </div>
               </div>
               <div className="bg-white text-gray-900 rounded-xl overflow-hidden">
                   <ReactQuill
@@ -388,7 +517,7 @@ export default function BlogAdmin() {
                     modules={modules}
                     theme="snow"
                     placeholder="Write your amazing post here..."
-                    className="h-96 mb-12" // mb-12 for toolbar space
+                    className="h-96 mb-12"
                   />
                 </div>
 
