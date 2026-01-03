@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { FaBlog, FaClock, FaArrowRight } from "react-icons/fa";
+import { FaPen, FaClock, FaArrowRight } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 export default function Blog() {
@@ -76,7 +76,7 @@ export default function Blog() {
 
               {/* Placeholder Image */}
               <div className="h-48 bg-gradient-to-br from-blue-500/20 via-cyan-500/10 to-teal-500/20 flex items-center justify-center">
-                <FaBlog className="text-6xl text-blue-500/30" />
+                <FaPen className="text-6xl text-blue-500/30" />
               </div>
 
               {/* Content */}
