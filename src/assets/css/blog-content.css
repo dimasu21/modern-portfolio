@@ -74,4 +74,10 @@ span.ql-size-large, span.ql-size-huge {
 /* Text alignment */
 .blog-content .ql-align-center { text-align: center; }
 .blog-content .ql-align-right { text-align: right; }
-.blog-content .ql-align-justify { text-align: justify; }
+.blog-content .ql-align-justify { 
+  text-align: justify;
+  text-justify: inter-word; /* Browser modern */
+  hyphens: auto; /* Potong kata otomatis */
+  -webkit-hyphens: auto;
+  word-break: break-word; /* Cegah kata terlalu panjang */
+}
