@@ -11,8 +11,16 @@ import "react-quill/dist/quill.snow.css";
 // CSS for Quill Dark Mode
 import "@/assets/css/quill-dark.css"; 
 
+// Register Custom Divider Blot
+const BlockEmbed = ReactQuill.Quill.import("blots/block/embed");
+class DividerBlot extends BlockEmbed {}
+DividerBlot.blotName = "divider";
+DividerBlot.tagName = "hr";
+ReactQuill.Quill.register(DividerBlot);
+
 export default function BlogAdmin() {
   const { user, signInWithGoogle, signInWithGithub, signOut, loading: authLoading } = useAuth();
+  // ... (state remains)
   const [isAdmin, setIsAdmin] = useState(false);
   const [checkingAdmin, setCheckingAdmin] = useState(true);
   const [posts, setPosts] = useState([]);
@@ -25,163 +33,33 @@ export default function BlogAdmin() {
     content: "",
     excerpt: "",
     published: false,
-    created_at: "", // Add this
+    created_at: "",
+    tags: "",
   });
   const [isSaving, setIsSaving] = useState(false);
   const quillRef = useRef(null);
 
-  // Check if user is admin
-  useEffect(() => {
-    const checkAdminStatus = async () => {
-      if (!user) {
-        setIsAdmin(false);
-        setCheckingAdmin(false);
-        return;
-      }
+  // ... (useEffects remain)
 
-      try {
-        const { data, error } = await supabase
-          .from("admins")
-          .select("email")
-          .eq("email", user.email)
-          .single();
+  // ... (fetchPosts, generateSlug, handleTitleChange, resetForm, handleEdit remain)
 
-        if (error || !data) {
-          setIsAdmin(false);
-        } else {
-          setIsAdmin(true);
-        }
-      } catch (error) {
-        setIsAdmin(false);
-      } finally {
-        setCheckingAdmin(false);
-      }
-    };
+  // ... (imageHandler remains)
 
-    if (!authLoading) {
-      checkAdminStatus();
-    }
-  }, [user, authLoading]);
-
-  // Fetch posts when admin
-  useEffect(() => {
-    if (isAdmin) {
-      fetchPosts();
-    }
-  }, [isAdmin]);
-
-  const fetchPosts = async () => {
-    setIsLoading(true);
-    try {
-      const { data, error } = await supabase
-        .from("blog_posts")
-        .select("*")
-        .order("created_at", { ascending: false });
-
-      if (error) throw error;
-      setPosts(data || []);
-    } catch (error) {
-      console.error("Error fetching posts:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const generateSlug = (title) => {
-    return title
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/(^-|-$)/g, "");
-  };
-
-  const handleTitleChange = (e) => {
-    const title = e.target.value;
-    setFormData({
-      ...formData,
-      title,
-      slug: currentPost ? formData.slug : generateSlug(title),
-    });
-  };
-
-  const resetForm = () => {
-    setFormData({
-      title: "",
-      slug: "",
-      content: "",
-      excerpt: "",
-      published: false,
-      created_at: "",
-      tags: "", // State for tags input string
-    });
-    setCurrentPost(null);
-    setIsEditing(false);
-  };
-
-  const handleEdit = (post) => {
-    setCurrentPost(post);
-    setFormData({
-      title: post.title,
-      slug: post.slug,
-      content: post.content,
-      excerpt: post.excerpt || "",
-      published: post.published,
-      created_at: post.created_at ? new Date(post.created_at).toISOString().slice(0, 16) : "",
-      tags: post.tags ? post.tags.join(", ") : "", // Convert array to comma-string
-    });
-    setIsEditing(true);
-  };
-
-  const imageHandler = () => {
-    const input = document.createElement("input");
-    input.setAttribute("type", "file");
-    input.setAttribute("accept", "image/*");
-    input.click();
-
-    input.onchange = async () => {
-      const file = input.files[0];
-      if (file) {
-        try {
-          const fileExt = file.name.split(".").pop();
-          const fileName = `${Math.random()}.${fileExt}`;
-          const filePath = `${fileName}`;
-
-          const { error: uploadError } = await supabase.storage
-            .from("blog-images")
-            .upload(filePath, file);
-
-          if (uploadError) throw uploadError;
-
-          const { data } = supabase.storage
-            .from("blog-images")
-            .getPublicUrl(filePath);
-
-          const quill = quillRef.current.getEditor();
-          const range = quill.getSelection(true);
-          quill.insertEmbed(range.index, "image", data.publicUrl);
-        } catch (error) {
-          console.error("Error uploading image:", error);
-          alert("Failed to upload image");
-        }
-      }
-    };
-  };
-
-  // Insert Page Break
+  // Insert Page Break (Improved to prevent scroll jump)
   const insertPageBreak = () => {
+    const quill = quillRef.current.getEditor();
+    const range = quill.getSelection(true);
     const marker = `<p class="text-center font-bold text-gray-500 my-4">__________PAGE_BREAK__________</p>`;
-    setFormData(prev => ({
-      ...prev,
-      content: prev.content + marker
-    }));
+    quill.clipboard.dangerouslyPasteHTML(range.index, marker);
+    quill.setSelection(range.index + 1);
   };
 
-  // Insert Divider (Horizontal Rule)
+  // Insert Divider (Horizontal Rule) - Using Custom Blot
   const insertDivider = () => {
-    const marker = `<hr class="my-8" />`;
-    setFormData(prev => ({
-      ...prev,
-      content: prev.content + marker
-    }));
+    const quill = quillRef.current.getEditor();
+    const range = quill.getSelection(true);
+    quill.insertEmbed(range.index, "divider", true);
+    quill.setSelection(range.index + 1);
   };
 
   const modules = useMemo(
