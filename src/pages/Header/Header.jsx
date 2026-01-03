@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   FaHome,
   FaLaptopCode,
-  FaUser,
   FaBriefcase,
   FaGraduationCap,
   FaCode,
@@ -10,6 +9,8 @@ import {
   FaBars,
   FaConciergeBell,
   FaComments,
+  FaChevronDown,
+  FaLayerGroup,
 } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -24,34 +25,50 @@ export default function Header() {
     return path;
   });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
+  // Close dropdown when clicking outside
   useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const navLinks = [
+  // Main nav links (shown directly in navbar)
+  const mainNavLinks = [
+    { id: "home", icon: FaHome, textKey: "nav.home", path: "/" },
+    { id: "projects", icon: FaLaptopCode, textKey: "nav.projects", path: "/projects" },
+    { id: "guestbook", icon: FaComments, textKey: "nav.guestbook", path: "/guestbook" },
+    { id: "contact", icon: FaEnvelope, textKey: "nav.contact", path: "/contact" },
+  ];
+
+  // Dropdown links (Skills, Experience, Certificate, Service)
+  const dropdownLinks = [
+    { id: "skills", icon: FaCode, textKey: "nav.skills", path: "/skills" },
+    { id: "experience", icon: FaBriefcase, textKey: "nav.experience", path: "/experience" },
+    { id: "certificate", icon: FaGraduationCap, textKey: "nav.certificate", path: "/certificate" },
+    { id: "service", icon: FaConciergeBell, textKey: "nav.service", path: "/service" },
+  ];
+
+  // All links for mobile menu
+  const allNavLinks = [
     { id: "home", icon: FaHome, textKey: "nav.home", path: "/" },
     { id: "skills", icon: FaCode, textKey: "nav.skills", path: "/skills" },
-    {
-      id: "experience",
-      icon: FaBriefcase,
-      textKey: "nav.experience",
-      path: "/experience",
-    },
-    {
-      id: "certificate",
-      icon: FaGraduationCap,
-      textKey: "nav.certificate",
-      path: "/certificate",
-    },
+    { id: "experience", icon: FaBriefcase, textKey: "nav.experience", path: "/experience" },
+    { id: "certificate", icon: FaGraduationCap, textKey: "nav.certificate", path: "/certificate" },
     { id: "projects", icon: FaLaptopCode, textKey: "nav.projects", path: "/projects" },
     { id: "service", icon: FaConciergeBell, textKey: "nav.service", path: "/service" },
     { id: "guestbook", icon: FaComments, textKey: "nav.guestbook", path: "/guestbook" },
     { id: "contact", icon: FaEnvelope, textKey: "nav.contact", path: "/contact" },
   ];
+
+  // Check if any dropdown link is active
+  const isDropdownActive = dropdownLinks.some(link => link.id === activeLink);
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-gray-900/95 backdrop-blur-md md:bg-transparent md:backdrop-blur-none">
@@ -73,11 +90,10 @@ export default function Header() {
               </div>
             </div>
 
-            {/* Navigation Links */}
-            <div className={`${isMenuOpen ? "block" : "hidden"} md:block`}>
-              <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-1 lg:gap-2 py-4 md:py-0">
-
-                {navLinks.map(({ id, icon: Icon, textKey, path }) => (
+            {/* Mobile Navigation Links */}
+            <div className={`${isMenuOpen ? "block" : "hidden"} md:hidden`}>
+              <div className="flex flex-col gap-2 py-4">
+                {allNavLinks.map(({ id, icon: Icon, textKey, path }) => (
                   <Link
                     key={id}
                     to={path}
@@ -85,7 +101,7 @@ export default function Header() {
                       setActiveLink(id);
                       setIsMenuOpen(false);
                     }}
-                    className={`px-3 py-2 md:py-1.5 rounded-lg md:rounded-full text-sm font-medium
+                    className={`px-3 py-2 rounded-lg text-sm font-medium
                       transition-all duration-300 flex items-center gap-2
                       hover:bg-white/10 
                       ${activeLink === id
@@ -94,16 +110,132 @@ export default function Header() {
                       }
                     `}
                   >
-                    <Icon
-                      className={`text-base ${activeLink === id ? "scale-110" : ""
-                        }`}
-                    />
+                    <Icon className={`text-base ${activeLink === id ? "scale-110" : ""}`} />
                     <span className="inline">{t(textKey)}</span>
                   </Link>
                 ))}
+              </div>
+            </div>
+
+            {/* Desktop Navigation Links */}
+            <div className="hidden md:block">
+              <div className="flex flex-row items-center gap-1 lg:gap-2">
+                {/* Home Link */}
+                <Link
+                  to="/"
+                  onClick={() => setActiveLink("home")}
+                  className={`px-3 py-1.5 rounded-full text-sm font-medium
+                    transition-all duration-300 flex items-center gap-2
+                    hover:bg-white/10 
+                    ${activeLink === "home"
+                      ? "bg-white/15 text-white"
+                      : "text-gray-300 hover:text-white"
+                    }
+                  `}
+                >
+                  <FaHome className={`text-base ${activeLink === "home" ? "scale-110" : ""}`} />
+                  <span>{t("nav.home")}</span>
+                </Link>
+
+                {/* More Dropdown */}
+                <div className="relative" ref={dropdownRef}>
+                  <button
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                    className={`px-3 py-1.5 rounded-full text-sm font-medium
+                      transition-all duration-300 flex items-center gap-2
+                      hover:bg-white/10 
+                      ${isDropdownActive
+                        ? "bg-white/15 text-white"
+                        : "text-gray-300 hover:text-white"
+                      }
+                    `}
+                  >
+                    <FaLayerGroup className="text-base" />
+                    <span>More</span>
+                    <FaChevronDown className={`text-xs transition-transform duration-200 ${isDropdownOpen ? "rotate-180" : ""}`} />
+                  </button>
+
+                  {/* Dropdown Menu */}
+                  {isDropdownOpen && (
+                    <div className="absolute top-full left-0 mt-2 w-48 py-2 bg-gray-900/95 backdrop-blur-md rounded-xl border border-gray-700/50 shadow-xl">
+                      {dropdownLinks.map(({ id, icon: Icon, textKey, path }) => (
+                        <Link
+                          key={id}
+                          to={path}
+                          onClick={() => {
+                            setActiveLink(id);
+                            setIsDropdownOpen(false);
+                          }}
+                          className={`px-4 py-2.5 text-sm font-medium
+                            transition-all duration-300 flex items-center gap-3
+                            hover:bg-white/10 
+                            ${activeLink === id
+                              ? "bg-white/10 text-white"
+                              : "text-gray-300 hover:text-white"
+                            }
+                          `}
+                        >
+                          <Icon className={`text-base ${activeLink === id ? "text-cyan-400" : ""}`} />
+                          <span>{t(textKey)}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Projects Link */}
+                <Link
+                  to="/projects"
+                  onClick={() => setActiveLink("projects")}
+                  className={`px-3 py-1.5 rounded-full text-sm font-medium
+                    transition-all duration-300 flex items-center gap-2
+                    hover:bg-white/10 
+                    ${activeLink === "projects"
+                      ? "bg-white/15 text-white"
+                      : "text-gray-300 hover:text-white"
+                    }
+                  `}
+                >
+                  <FaLaptopCode className={`text-base ${activeLink === "projects" ? "scale-110" : ""}`} />
+                  <span>{t("nav.projects")}</span>
+                </Link>
+
+                {/* Guestbook Link */}
+                <Link
+                  to="/guestbook"
+                  onClick={() => setActiveLink("guestbook")}
+                  className={`px-3 py-1.5 rounded-full text-sm font-medium
+                    transition-all duration-300 flex items-center gap-2
+                    hover:bg-white/10 
+                    ${activeLink === "guestbook"
+                      ? "bg-white/15 text-white"
+                      : "text-gray-300 hover:text-white"
+                    }
+                  `}
+                >
+                  <FaComments className={`text-base ${activeLink === "guestbook" ? "scale-110" : ""}`} />
+                  <span>{t("nav.guestbook")}</span>
+                </Link>
+
+                {/* Contact Link */}
+                <Link
+                  to="/contact"
+                  onClick={() => setActiveLink("contact")}
+                  className={`px-3 py-1.5 rounded-full text-sm font-medium
+                    transition-all duration-300 flex items-center gap-2
+                    hover:bg-white/10 
+                    ${activeLink === "contact"
+                      ? "bg-white/15 text-white"
+                      : "text-gray-300 hover:text-white"
+                    }
+                  `}
+                >
+                  <FaEnvelope className={`text-base ${activeLink === "contact" ? "scale-110" : ""}`} />
+                  <span>{t("nav.contact")}</span>
+                </Link>
                 
                 {/* Desktop Language Toggle */}
-                <div className="hidden md:flex items-center gap-2 ml-2 pl-2 border-l border-gray-700/50">
+                <div className="flex items-center gap-2 ml-2 pl-2 border-l border-gray-700/50">
                   <LanguageSwitcher />
                 </div>
               </div>
