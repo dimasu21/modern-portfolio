@@ -13,7 +13,8 @@
   "blog": {
     "label": "Blog",
     "title": "Blog",
-    "subtitle": "Thoughts, tutorials, and insights about technology, development, and design.",
+    "tagline": "A collection of my thoughts",
+    "description": "Here you can find a collection of my thoughts on various topics. I try to write about things that I find interesting, and that I think others might find interesting as well. I hope you enjoy reading them!",
     "readMore": "Read More",
     "comingSoon": "More articles coming soon. Stay tuned!"
   },

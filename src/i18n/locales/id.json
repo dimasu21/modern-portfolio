@@ -12,8 +12,9 @@
   },
   "blog": {
     "label": "Blog",
-    "title": "Blog Saya",
-    "subtitle": "Pemikiran, tutorial, dan wawasan tentang teknologi, pengembangan, dan desain.",
+    "title": "Blog",
+    "tagline": "Kumpulan pemikiran saya",
+    "description": "Di sini Anda dapat menemukan kumpulan pemikiran saya tentang berbagai topik. Saya mencoba menulis tentang hal-hal yang menurut saya menarik, dan yang menurut saya mungkin menarik bagi orang lain juga. Semoga Anda menikmati membacanya!",
     "readMore": "Baca Selengkapnya",
     "comingSoon": "Artikel lainnya segera hadir. Nantikan!"
   },
