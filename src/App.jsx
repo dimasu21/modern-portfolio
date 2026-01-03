@@ -10,6 +10,7 @@ import Certificate from "./pages/Certificate/Certificate";
 import Service from "./pages/Service/Service";
 import Guestbook from "./pages/Guestbook/Guestbook";
 import Blog from "./pages/Blog/Blog";
+import BlogPost from "./pages/Blog/BlogPost";
 import BlogAdmin from "./pages/BlogAdmin/BlogAdmin";
 import Footer from "./components/Footer";
 import CursorTrail from "./components/CursorTrail";
@@ -35,6 +36,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Hero />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/admin/blog" element={<BlogAdmin />} />
           <Route path="/skills" element={<Skills />} />
           <Route path="/experience" element={<Experience />} />
