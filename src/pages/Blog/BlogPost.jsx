@@ -209,10 +209,10 @@ export default function BlogPost() {
                   key={p}
                   to={`/blog/${slug}?page=${p}`}
                   onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                  className={`w-10 h-10 flex items-center justify-center rounded-lg border transition-colors ${
+                  className={`w-10 h-10 flex items-center justify-center rounded-lg border transition-all ${
                     p === currentPage
-                      ? "bg-blue-600 border-blue-600 text-white font-bold"
-                      : "bg-gray-900 border-gray-800 text-gray-400 hover:bg-gray-800 hover:text-white"
+                      ? "bg-gradient-to-r from-teal-400 to-blue-500 border-transparent text-white font-bold"
+                      : "bg-gray-900 border-gray-800 text-gray-400 hover:text-teal-400 hover:border-teal-500/50"
                   }`}
                 >
                   {p}

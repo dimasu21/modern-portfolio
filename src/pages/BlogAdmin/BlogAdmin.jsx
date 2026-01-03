@@ -479,7 +479,7 @@ export default function BlogAdmin() {
                 <button
                   type="button"
                   onClick={insertPageBreak}
-                  className="text-xs flex items-center gap-1 text-blue-400 hover:text-blue-300 transition-colors"
+                  className="text-xs flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
                 >
                   <SplitSquareHorizontal size={14} />
                   Insert Page Break
