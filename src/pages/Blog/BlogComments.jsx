@@ -153,7 +153,8 @@ const BlogComments = ({ postId }) => {
           </form>
         ) : (
           <div className="bg-[#0a1628] border border-gray-800 rounded-xl p-6 text-center">
-            <p className="text-gray-400 mb-4">Sign in to join the discussion</p>
+            <h4 className="text-gray-300 font-medium mb-2">Sign in to join the conversation</h4>
+            <p className="text-gray-500 text-sm mb-6">Don't worry, your data is safe with us.</p>
             <div className="flex justify-center gap-3">
                 <button onClick={signInWithGoogle} className="flex items-center gap-2 px-4 py-2 bg-white hover:bg-gray-100 text-gray-900 rounded-lg text-sm font-medium transition-colors">
                     <FaGoogle /> Google
