@@ -1,10 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect, useMemo, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/context/AuthContext";
 import { FaPen, FaTrash, FaEye, FaEyeSlash, FaPlus, FaSave, FaTimes, FaArrowLeft, FaGoogle, FaGithub } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { Loader2, LogOut } from "lucide-react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+
+// CSS for Quill Dark Mode
+import "@/assets/css/quill-dark.css"; 
 
 export default function BlogAdmin() {
   const { user, signInWithGoogle, signInWithGithub, signOut, loading: authLoading } = useAuth();
@@ -22,6 +27,7 @@ export default function BlogAdmin() {
     published: false,
   });
   const [isSaving, setIsSaving] = useState(false);
+  const quillRef = useRef(null);
 
   // Check if user is admin
   useEffect(() => {
@@ -120,6 +126,60 @@ export default function BlogAdmin() {
     setIsEditing(true);
   };
 
+  const imageHandler = () => {
+    const input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "image/*");
+    input.click();
+
+    input.onchange = async () => {
+      const file = input.files[0];
+      if (file) {
+        try {
+          const fileExt = file.name.split(".").pop();
+          const fileName = `${Math.random()}.${fileExt}`;
+          const filePath = `${fileName}`;
+
+          const { error: uploadError } = await supabase.storage
+            .from("blog-images")
+            .upload(filePath, file);
+
+          if (uploadError) throw uploadError;
+
+          const { data } = supabase.storage
+            .from("blog-images")
+            .getPublicUrl(filePath);
+
+          const quill = quillRef.current.getEditor();
+          const range = quill.getSelection(true);
+          quill.insertEmbed(range.index, "image", data.publicUrl);
+        } catch (error) {
+          console.error("Error uploading image:", error);
+          alert("Failed to upload image");
+        }
+      }
+    };
+  };
+
+  const modules = useMemo(
+    () => ({
+      toolbar: {
+        container: [
+          [{ header: [1, 2, 3, false] }],
+          ["bold", "italic", "underline", "strike", "blockquote"],
+          [{ list: "ordered" }, { list: "bullet" }],
+          [{ align: [] }], // Text alignment
+          ["link", "image"],
+          ["clean"],
+        ],
+        handlers: {
+          image: imageHandler,
+        },
+      },
+    }),
+    []
+  );
+
   const handleSave = async (e) => {
     e.preventDefault();
     if (!formData.title || !formData.content) {
@@ -135,7 +195,7 @@ export default function BlogAdmin() {
           .update({
             title: formData.title,
             slug: formData.slug,
-            content: formData.content,
+            content: formData.content, // Now stores HTML
             excerpt: formData.excerpt,
             published: formData.published,
             updated_at: new Date().toISOString(),
@@ -148,7 +208,7 @@ export default function BlogAdmin() {
           {
             title: formData.title,
             slug: formData.slug,
-            content: formData.content,
+            content: formData.content, // Now stores HTML
             excerpt: formData.excerpt,
             published: formData.published,
           },
@@ -202,7 +262,8 @@ export default function BlogAdmin() {
     });
   };
 
-  // Loading state
+  // ... (Login & Loading UI code remains same, updated Editor below)
+
   if (authLoading || checkingAdmin) {
     return (
       <main className="bg-[#020617] text-white min-h-screen pt-32 pb-16 flex items-center justify-center">
@@ -211,7 +272,6 @@ export default function BlogAdmin() {
     );
   }
 
-  // Not logged in - show login options
   if (!user) {
     return (
       <main className="bg-[#020617] text-white min-h-screen pt-32 pb-16">
@@ -254,7 +314,6 @@ export default function BlogAdmin() {
     );
   }
 
-  // Logged in but not admin
   if (!isAdmin) {
     return (
       <main className="bg-[#020617] text-white min-h-screen pt-32 pb-16">
@@ -291,7 +350,6 @@ export default function BlogAdmin() {
     );
   }
 
-  // Admin Dashboard
   return (
     <main className="bg-[#020617] text-white min-h-screen pt-32 pb-16">
       <div className="container mx-auto px-4 max-w-4xl">
@@ -377,17 +435,20 @@ export default function BlogAdmin() {
 
               <div>
                 <label className="block text-sm text-gray-400 mb-2">Content</label>
-                <textarea
-                  value={formData.content}
-                  onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                  placeholder="Write your post content..."
-                  rows={10}
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white focus:outline-none focus:border-blue-500 resize-y"
-                  required
-                />
+                <div className="bg-white text-gray-900 rounded-xl overflow-hidden">
+                  <ReactQuill
+                    ref={quillRef}
+                    value={formData.content}
+                    onChange={(content) => setFormData({ ...formData, content })}
+                    modules={modules}
+                    theme="snow"
+                    placeholder="Write your amazing post here..."
+                    className="h-96 mb-12" // mb-12 for toolbar space
+                  />
+                </div>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 pt-6">
                 <input
                   type="checkbox"
                   id="published"

@@ -1,0 +1,33 @@
+/* Custom Dark Theme for Quill Editor */
+.ql-container.ql-snow {
+  border: none !important;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.ql-toolbar.ql-snow {
+  border: none !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  background-color: #f3f4f6;
+}
+
+.ql-editor {
+  min-height: 300px;
+  background-color: white;
+  color: #1f2937; /* Gray-800 */
+}
+
+.ql-editor strong {
+  font-weight: bold;
+}
+
+.ql-editor em {
+  font-style: italic;
+}
+
+/* Image resize handlers */
+.ql-editor img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}

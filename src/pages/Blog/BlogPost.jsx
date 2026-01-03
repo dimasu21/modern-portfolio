@@ -3,9 +3,8 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { supabase } from "@/lib/supabase";
 import { FaArrowLeft, FaCalendar } from "react-icons/fa";
-import ReactMarkdown from "react-markdown";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
+import parse from "html-react-parser";
+import "@/assets/css/blog-content.css"; // We'll add this for typography
 
 export default function BlogPost() {
   const { slug } = useParams();
@@ -133,74 +132,9 @@ export default function BlogPost() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="prose prose-invert prose-lg max-w-none"
+          className="blog-content"
         >
-          <ReactMarkdown
-            components={{
-              // Code blocks with syntax highlighting
-              code({ node, inline, className, children, ...props }) {
-                const match = /language-(\w+)/.exec(className || "");
-                return !inline && match ? (
-                  <SyntaxHighlighter
-                    style={vscDarkPlus}
-                    language={match[1]}
-                    PreTag="div"
-                    className="rounded-xl !bg-gray-900 !my-6"
-                    {...props}
-                  >
-                    {String(children).replace(/\n$/, "")}
-                  </SyntaxHighlighter>
-                ) : (
-                  <code
-                    className="bg-gray-800 px-1.5 py-0.5 rounded text-pink-400"
-                    {...props}
-                  >
-                    {children}
-                  </code>
-                );
-              },
-              // Headings
-              h1: ({ children }) => (
-                <h1 className="text-3xl font-bold mt-12 mb-6 text-white">{children}</h1>
-              ),
-              h2: ({ children }) => (
-                <h2 className="text-2xl font-bold mt-10 mb-4 text-white">{children}</h2>
-              ),
-              h3: ({ children }) => (
-                <h3 className="text-xl font-semibold mt-8 mb-3 text-white">{children}</h3>
-              ),
-              // Paragraphs
-              p: ({ children }) => (
-                <p className="text-gray-300 leading-relaxed mb-6">{children}</p>
-              ),
-              // Lists
-              ul: ({ children }) => (
-                <ul className="list-disc list-inside space-y-2 mb-6 text-gray-300">{children}</ul>
-              ),
-              ol: ({ children }) => (
-                <ol className="list-decimal list-inside space-y-2 mb-6 text-gray-300">{children}</ol>
-              ),
-              // Links
-              a: ({ href, children }) => (
-                <a
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-400 hover:text-blue-300 underline"
-                >
-                  {children}
-                </a>
-              ),
-              // Blockquotes
-              blockquote: ({ children }) => (
-                <blockquote className="border-l-4 border-blue-500 pl-4 italic text-gray-400 my-6">
-                  {children}
-                </blockquote>
-              ),
-            }}
-          >
-            {post.content}
-          </ReactMarkdown>
+          {parse(post.content)}
         </motion.div>
       </article>
     </main>
