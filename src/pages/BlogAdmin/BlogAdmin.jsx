@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { supabase } from "@/lib/supabase";
-import { FaPen, FaTrash, FaEye, FaEyeSlash, FaPlus, FaSave, FaTimes, FaArrowLeft } from "react-icons/fa";
+import { useAuth } from "@/context/AuthContext";
+import { FaPen, FaTrash, FaEye, FaEyeSlash, FaPlus, FaSave, FaTimes, FaArrowLeft, FaGoogle, FaGithub } from "react-icons/fa";
 import { Link } from "react-router-dom";
-
-// Admin secret - simple password
-const ADMIN_SECRET = "dimasu";
+import { Loader2, LogOut } from "lucide-react";
 
 export default function BlogAdmin() {
+  const { user, signInWithGoogle, signInWithGithub, signOut, loading: authLoading } = useAuth();
   const [isAdmin, setIsAdmin] = useState(false);
-  const [adminInput, setAdminInput] = useState("");
+  const [checkingAdmin, setCheckingAdmin] = useState(true);
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
@@ -23,13 +23,38 @@ export default function BlogAdmin() {
   });
   const [isSaving, setIsSaving] = useState(false);
 
-  // Check admin status from localStorage
+  // Check if user is admin
   useEffect(() => {
-    const storedAdmin = localStorage.getItem("blog_admin");
-    if (storedAdmin === "true") {
-      setIsAdmin(true);
+    const checkAdminStatus = async () => {
+      if (!user) {
+        setIsAdmin(false);
+        setCheckingAdmin(false);
+        return;
+      }
+
+      try {
+        const { data, error } = await supabase
+          .from("admins")
+          .select("email")
+          .eq("email", user.email)
+          .single();
+
+        if (error || !data) {
+          setIsAdmin(false);
+        } else {
+          setIsAdmin(true);
+        }
+      } catch (error) {
+        setIsAdmin(false);
+      } finally {
+        setCheckingAdmin(false);
+      }
+    };
+
+    if (!authLoading) {
+      checkAdminStatus();
     }
-  }, []);
+  }, [user, authLoading]);
 
   // Fetch posts when admin
   useEffect(() => {
@@ -53,22 +78,6 @@ export default function BlogAdmin() {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleAdminLogin = (e) => {
-    e.preventDefault();
-    if (adminInput === ADMIN_SECRET) {
-      setIsAdmin(true);
-      localStorage.setItem("blog_admin", "true");
-      setAdminInput("");
-    } else {
-      alert("Wrong secret key!");
-    }
-  };
-
-  const handleAdminLogout = () => {
-    setIsAdmin(false);
-    localStorage.removeItem("blog_admin");
   };
 
   const generateSlug = (title) => {
@@ -121,7 +130,6 @@ export default function BlogAdmin() {
     setIsSaving(true);
     try {
       if (currentPost) {
-        // Update existing post
         const { error } = await supabase
           .from("blog_posts")
           .update({
@@ -136,7 +144,6 @@ export default function BlogAdmin() {
 
         if (error) throw error;
       } else {
-        // Create new post
         const { error } = await supabase.from("blog_posts").insert([
           {
             title: formData.title,
@@ -195,8 +202,17 @@ export default function BlogAdmin() {
     });
   };
 
-  // Admin Login Screen
-  if (!isAdmin) {
+  // Loading state
+  if (authLoading || checkingAdmin) {
+    return (
+      <main className="bg-[#020617] text-white min-h-screen pt-32 pb-16 flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-gray-400" />
+      </main>
+    );
+  }
+
+  // Not logged in - show login options
+  if (!user) {
     return (
       <main className="bg-[#020617] text-white min-h-screen pt-32 pb-16">
         <div className="container mx-auto px-4 max-w-md">
@@ -205,30 +221,70 @@ export default function BlogAdmin() {
             animate={{ opacity: 1, y: 0 }}
             className="bg-gray-900/50 border border-gray-800 rounded-2xl p-8"
           >
-            <h1 className="text-2xl font-bold mb-6 text-center">Blog Admin</h1>
-            <form onSubmit={handleAdminLogin}>
-              <input
-                type="password"
-                value={adminInput}
-                onChange={(e) => setAdminInput(e.target.value)}
-                placeholder="Enter admin secret..."
-                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white mb-4 focus:outline-none focus:border-blue-500"
-                autoFocus
-              />
+            <h1 className="text-2xl font-bold mb-2 text-center">Blog Admin</h1>
+            <p className="text-gray-400 text-sm text-center mb-6">Sign in to manage your blog</p>
+            
+            <div className="space-y-3">
               <button
-                type="submit"
-                className="w-full py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-xl font-semibold transition-colors"
+                onClick={signInWithGoogle}
+                className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-white hover:bg-gray-100 text-gray-800 rounded-xl font-medium transition-colors"
               >
-                Login
+                <FaGoogle />
+                Sign in with Google
               </button>
-            </form>
+              <button
+                onClick={signInWithGithub}
+                className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-[#238636] hover:bg-[#2ea043] text-white rounded-xl font-medium transition-colors"
+              >
+                <FaGithub />
+                Sign in with GitHub
+              </button>
+            </div>
+
             <Link
               to="/blog"
-              className="flex items-center justify-center gap-2 mt-4 text-gray-400 hover:text-white transition-colors"
+              className="flex items-center justify-center gap-2 mt-6 text-gray-400 hover:text-white transition-colors"
             >
               <FaArrowLeft className="text-sm" />
               Back to Blog
             </Link>
+          </motion.div>
+        </div>
+      </main>
+    );
+  }
+
+  // Logged in but not admin
+  if (!isAdmin) {
+    return (
+      <main className="bg-[#020617] text-white min-h-screen pt-32 pb-16">
+        <div className="container mx-auto px-4 max-w-md">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="bg-gray-900/50 border border-gray-800 rounded-2xl p-8 text-center"
+          >
+            <div className="text-5xl mb-4">🚫</div>
+            <h1 className="text-2xl font-bold mb-2">Access Denied</h1>
+            <p className="text-gray-400 mb-6">
+              You don't have admin access. Contact the site owner if you need access.
+            </p>
+            <div className="flex flex-col gap-3">
+              <button
+                onClick={signOut}
+                className="flex items-center justify-center gap-2 px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors"
+              >
+                <LogOut className="w-4 h-4" />
+                Sign out
+              </button>
+              <Link
+                to="/blog"
+                className="flex items-center justify-center gap-2 text-gray-400 hover:text-white transition-colors"
+              >
+                <FaArrowLeft className="text-sm" />
+                Back to Blog
+              </Link>
+            </div>
           </motion.div>
         </div>
       </main>
@@ -243,7 +299,9 @@ export default function BlogAdmin() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-bold">Blog Admin</h1>
-            <p className="text-gray-400 text-sm mt-1">Manage your blog posts</p>
+            <p className="text-gray-400 text-sm mt-1">
+              Logged in as {user.email}
+            </p>
           </div>
           <div className="flex items-center gap-3">
             <Link
@@ -253,9 +311,10 @@ export default function BlogAdmin() {
               View Blog
             </Link>
             <button
-              onClick={handleAdminLogout}
-              className="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-sm transition-colors"
+              onClick={signOut}
+              className="flex items-center gap-2 px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-sm transition-colors"
             >
+              <LogOut className="w-4 h-4" />
               Logout
             </button>
           </div>

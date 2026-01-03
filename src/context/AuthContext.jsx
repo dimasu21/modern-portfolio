@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }) => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: window.location.origin + "/guestbook",
+        redirectTo: window.location.href,
       },
     });
     if (error) throw error;
@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }) => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "github",
       options: {
-        redirectTo: window.location.origin + "/guestbook",
+        redirectTo: window.location.href,
       },
     });
     if (error) throw error;
