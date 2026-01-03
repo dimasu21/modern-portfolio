@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { supabase } from "@/lib/supabase";
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight, FaTag } from "react-icons/fa";
 import parse from "html-react-parser";
 import "@/assets/css/blog-content.css";
 
@@ -10,27 +10,56 @@ export default function BlogPost() {
   const { slug } = useParams();
   const navigate = useNavigate();
   const [post, setPost] = useState(null);
+  const [nextPost, setNextPost] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
-    fetchPost();
+    fetchPostData();
   }, [slug]);
 
-  const fetchPost = async () => {
+  const fetchPostData = async () => {
+    setIsLoading(true);
     try {
-      const { data, error } = await supabase
+      // 1. Fetch Current Post
+      const { data: currentPost, error } = await supabase
         .from("blog_posts")
         .select("*")
         .eq("slug", slug)
         .eq("published", true)
         .single();
 
-      if (error || !data) {
+      if (error || !currentPost) {
         setNotFound(true);
-      } else {
-        setPost(data);
+        setIsLoading(false);
+        return;
       }
+
+      setPost(currentPost);
+
+      // 2. Fetch Next Post (Newer than current)
+      // Note: "Next" logic depends on order. Usually "Next" means "Newer post" or "Next in reading list".
+      // Let's assume Next = Newer post.
+      const { data: nextData } = await supabase
+        .from("blog_posts")
+        .select("title, slug")
+        .eq("published", true)
+        .gt("created_at", currentPost.created_at) // Newer than current
+        .order("created_at", { ascending: true }) // Get the immediate next one
+        .limit(1)
+        .single();
+      
+      // If no newer post, maybe get older? 
+      // Usually "Next" = Newer, "Prev" = Older. User requested "Next" and "Back".
+      // Let's stick to Next = Newer for now. If null, maybe we try Older?
+      // Actually common pattern: 
+      // Left: Previous (Older)
+      // Right: Next (Newer)
+      // User asked for: "Back to Blog" (Left) and "Next" (Right).
+      // So let's fetch the IMMEDIATE NEXT NEWER post.
+
+      setNextPost(nextData);
+
     } catch (error) {
       console.error("Error fetching post:", error);
       setNotFound(true);
@@ -89,24 +118,17 @@ export default function BlogPost() {
 
   return (
     <main className="bg-[#020617] text-white min-h-screen pt-32 pb-24">
-      {/* Reading Progress Bar (Optional, nice to have) */}
-      <motion.div 
-        className="fixed top-0 left-0 right-0 h-1 bg-blue-500 origin-left z-50"
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: 1 }}
-        transition={{ duration: 0.5 }}
-        style={{ scaleX: 0 }} // We'd need useScroll for actual progress, keeping simple for now
-      />
-
-      <article className="container mx-auto px-4 max-w-3xl"> {/* Slightly tighter container */}
+      <article className="container mx-auto px-4 max-w-3xl">
         
-        {/* Back Button */}
+        {/* Top Back Link */}
         <div className="max-w-[65ch] mx-auto mb-10">
           <Link
             to="/blog"
             className="inline-flex items-center gap-2 text-gray-500 hover:text-blue-400 transition-colors text-sm font-medium"
           >
-            <FaArrowLeft />
+            <div className="p-1 rounded-full border border-gray-700">
+             <FaArrowLeft size={10} />
+            </div>
             Back to Blog
           </Link>
         </div>
@@ -128,7 +150,6 @@ export default function BlogPost() {
             className="flex items-center gap-4 text-gray-500 text-sm font-mono"
           >
             <time dateTime={post.created_at}>{formatDate(post.created_at)}</time>
-            {/* We could add reading time here later */}
           </motion.div>
 
           {post.excerpt && (
@@ -148,10 +169,68 @@ export default function BlogPost() {
            initial={{ opacity: 0 }}
            animate={{ opacity: 1 }}
            transition={{ delay: 0.4 }}
-           className="blog-content w-full"
+           className="blog-content w-full mb-16"
         >
           {parse(post.content)}
         </motion.div>
+
+        {/* Footer Section */}
+        <div className="max-w-[65ch] mx-auto">
+          
+          {/* Tags */}
+          {post.tags && post.tags.length > 0 && (
+            <div className="mb-12">
+              <h3 className="text-gray-400 text-sm font-semibold mb-3">Tags:</h3>
+              <div className="flex flex-wrap gap-2">
+                {post.tags.map((tag, index) => (
+                  <span 
+                    key={index} 
+                    className="px-3 py-1 bg-gray-900 border border-gray-800 rounded-lg text-gray-300 text-sm hover:border-gray-600 transition-colors cursor-default"
+                  >
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Divider */}
+          <hr className="border-gray-800 mb-12" />
+
+          {/* Navigation Links */}
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-8">
+            
+            {/* Back to Blog */}
+            <Link
+              to="/blog"
+              className="group flex items-center gap-3 text-gray-400 hover:text-white transition-colors"
+            >
+              <div className="p-2 rounded-full border border-gray-800 group-hover:border-gray-600 transition-colors">
+                <FaArrowLeft className="w-3 h-3" />
+              </div>
+              <span className="font-medium text-lg">Back to Blog</span>
+            </Link>
+
+            {/* Next Post */}
+            {nextPost ? (
+              <Link
+                to={`/blog/${nextPost.slug}`}
+                className="group text-right max-w-[250px] sm:max-w-[300px]"
+              >
+                <div className="flex items-center justify-end gap-2 text-gray-500 mb-1 text-sm">
+                  Next <FaArrowRight size={10} />
+                </div>
+                <h4 className="text-lg font-bold text-white group-hover:text-blue-400 transition-colors line-clamp-2 leading-tight">
+                  {nextPost.title}
+                </h4>
+              </Link>
+            ) : (
+              <div className="hidden sm:block"></div> /* Spacer if no next post */
+            )}
+
+          </div>
+
+        </div>
 
       </article>
     </main>

@@ -111,6 +111,7 @@ export default function BlogAdmin() {
       excerpt: "",
       published: false,
       created_at: "",
+      tags: "", // State for tags input string
     });
     setCurrentPost(null);
     setIsEditing(false);
@@ -125,6 +126,7 @@ export default function BlogAdmin() {
       excerpt: post.excerpt || "",
       published: post.published,
       created_at: post.created_at ? new Date(post.created_at).toISOString().slice(0, 16) : "",
+      tags: post.tags ? post.tags.join(", ") : "", // Convert array to comma-string
     });
     setIsEditing(true);
   };
@@ -199,11 +201,12 @@ export default function BlogAdmin() {
           .update({
             title: formData.title,
             slug: formData.slug,
-            content: formData.content, // Now stores HTML
+            content: formData.content,
             excerpt: formData.excerpt,
             published: formData.published,
             updated_at: new Date().toISOString(),
             created_at: formData.created_at ? new Date(formData.created_at).toISOString() : currentPost.created_at,
+            tags: formData.tags.split(",").map(t => t.trim()).filter(Boolean), // String to Array
           })
           .eq("id", currentPost.id);
 
@@ -213,10 +216,11 @@ export default function BlogAdmin() {
           {
             title: formData.title,
             slug: formData.slug,
-            content: formData.content, // Now stores HTML
+            content: formData.content,
             excerpt: formData.excerpt,
             published: formData.published,
             created_at: formData.created_at ? new Date(formData.created_at).toISOString() : new Date().toISOString(),
+            tags: formData.tags.split(",").map(t => t.trim()).filter(Boolean), // String to Array
           },
         ]);
 
@@ -448,6 +452,17 @@ export default function BlogAdmin() {
                   className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white focus:outline-none focus:border-blue-500"
                 />
                 <p className="text-xs text-gray-500 mt-1">Leave empty to use current time</p>
+              </div>
+
+              <div>
+                <label className="block text-sm text-gray-400 mb-2">Tags (Comma separated)</label>
+                <input
+                  type="text"
+                  value={formData.tags}
+                  onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
+                  placeholder="e.g. javascript, tutorial, coding"
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white focus:outline-none focus:border-blue-500"
+                />
               </div>
 
               <div>
