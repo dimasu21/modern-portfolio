@@ -1,6 +1,7 @@
 {
   "nav": {
     "home": "Beranda",
+    "blog": "Blog",
     "skills": "Keahlian",
     "experience": "Pengalaman",
     "certificate": "Sertifikat",
@@ -8,6 +9,13 @@
     "service": "Layanan",
     "contact": "Kontak",
     "guestbook": "Tamu"
+  },
+  "blog": {
+    "label": "Blog",
+    "title": "Blog Saya",
+    "subtitle": "Pemikiran, tutorial, dan wawasan tentang teknologi, pengembangan, dan desain.",
+    "readMore": "Baca Selengkapnya",
+    "comingSoon": "Artikel lainnya segera hadir. Nantikan!"
   },
   "hero": {
     "welcome": "Selamat datang di dunia saya",

@@ -1,6 +1,7 @@
 {
   "nav": {
     "home": "Home",
+    "blog": "Blog",
     "skills": "Skills",
     "experience": "Experience",
     "certificate": "Certificate",
@@ -8,6 +9,13 @@
     "service": "Service",
     "contact": "Contact",
     "guestbook": "Guest"
+  },
+  "blog": {
+    "label": "Blog",
+    "title": "My Blog",
+    "subtitle": "Thoughts, tutorials, and insights about technology, development, and design.",
+    "readMore": "Read More",
+    "comingSoon": "More articles coming soon. Stay tuned!"
   },
   "hero": {
     "welcome": "Welcome to my universe",

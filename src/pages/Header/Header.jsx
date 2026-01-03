@@ -11,6 +11,7 @@ import {
   FaComments,
   FaChevronDown,
   FaLayerGroup,
+  FaBlog,
 } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -42,6 +43,7 @@ export default function Header() {
   // Main nav links (shown directly in navbar)
   const mainNavLinks = [
     { id: "home", icon: FaHome, textKey: "nav.home", path: "/" },
+    { id: "blog", icon: FaBlog, textKey: "nav.blog", path: "/blog" },
     { id: "projects", icon: FaLaptopCode, textKey: "nav.projects", path: "/projects" },
     { id: "contact", icon: FaEnvelope, textKey: "nav.contact", path: "/contact" },
   ];
@@ -58,6 +60,7 @@ export default function Header() {
   // All links for mobile menu
   const allNavLinks = [
     { id: "home", icon: FaHome, textKey: "nav.home", path: "/" },
+    { id: "blog", icon: FaBlog, textKey: "nav.blog", path: "/blog" },
     { id: "skills", icon: FaCode, textKey: "nav.skills", path: "/skills" },
     { id: "experience", icon: FaBriefcase, textKey: "nav.experience", path: "/experience" },
     { id: "certificate", icon: FaGraduationCap, textKey: "nav.certificate", path: "/certificate" },
