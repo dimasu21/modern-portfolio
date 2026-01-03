@@ -20,7 +20,11 @@
     "aboutMe": "About me",
     "uiMagic": "UI Magic",
     "cleanCode": "Clean Code",
-    "innovation": "Innovation"
+    "innovation": "Innovation",
+    "role1": "Full-Stack Developer & UI/UX Enthusiast",
+    "role2": "Python Developer & Machine Learning Practitioner",
+    "role3": "Deep Learning & AI Engineer",
+    "role4": "Docker & GitHub for DevOps"
   },
   "about": {
     "title": "AI Research, Developer, Designer, and Innovator",

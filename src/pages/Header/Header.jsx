@@ -14,6 +14,7 @@ import {
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import DLogo from "@/assets/icons/D logo.svg";
 
 export default function Header() {
   const location = useLocation();
@@ -60,7 +61,7 @@ export default function Header() {
             {/* Mobile Menu Button */}
             <div className="flex justify-between items-center md:hidden px-2">
               <Link to="/" className="flex items-center gap-2">
-                <img src="/src/assets/icons/D logo.svg" alt="Logo" className="h-8 w-8" />
+                <img src={DLogo} alt="Logo" className="h-8 w-8" />
                 <span className="text-white font-bold text-lg">Dimas Tri M</span>
               </Link>
               <div className="flex items-center gap-2">

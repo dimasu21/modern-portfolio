@@ -16,10 +16,10 @@ import { useTranslation } from "react-i18next";
 export default function Hero() {
   const { t } = useTranslation();
   const words = [
-    "Full-Stack Developer & UI/UX Enthusiast",
-    "Python Developer & Machine Learning Practitioner",
-    "Deep Learning & AI Engineer",
-    "Docker & GitHub for DevOps",
+    t("hero.role1"),
+    t("hero.role2"),
+    t("hero.role3"),
+    t("hero.role4"),
   ];
 
   const [code] = useState(`
