@@ -71,6 +71,24 @@ span.ql-size-large, span.ql-size-huge {
   display: block;
 }
 
+/* Image Captions - Italic text below images */
+.blog-content img + p,
+.blog-content img + em,
+.blog-content p:has(> em:only-child) {
+  text-align: center;
+  font-style: italic;
+  color: #9ca3af; /* gray-400 */
+  font-size: 0.875rem;
+  margin-top: 0.5rem !important;
+}
+
+/* Ensure italic text is always visible */
+.blog-content em,
+.blog-content i {
+  color: #9ca3af; /* gray-400 - visible on dark bg */
+  font-style: italic;
+}
+
 /* Text alignment */
 .blog-content .ql-align-center { text-align: center; }
 .blog-content .ql-align-right { text-align: right; }
