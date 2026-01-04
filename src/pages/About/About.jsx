@@ -17,10 +17,13 @@ export default function About() {
               <div className="bg-linear-to-b aspect-76/59 relative rounded-2xl p-px from-zinc-300 to-transparent">
                 <img
                   src={HeroImg}
-                  className="rounded-[15px] shadow block"
-                  alt="payments illustration"
+                  className="rounded-[15px] shadow block opacity-0 animate-[fadeIn_0.3s_ease-in_forwards]"
+                  alt="Dimas Tri Mulyo"
                   width={1207}
                   height={929}
+                  loading="eager"
+                  fetchPriority="high"
+                  style={{ animationDelay: '0.1s' }}
                 />
               </div>
             </div>

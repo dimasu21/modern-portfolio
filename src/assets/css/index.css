@@ -237,3 +237,14 @@ pre[class*="language-"] {
     linear-gradient(to bottom, rgba(100, 100, 255, 0.1) 1px, transparent 1px);
   background-size: 30px 30px;
 }
+
+/* Fade in animation for images */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
