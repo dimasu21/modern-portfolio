@@ -263,9 +263,7 @@ const profile = {
               </div>
             </div>
           </div>
-        </section>
-
-        {/* Scroll indicator */}
+          {/* Scroll indicator - Moved inside section */}
         <div className="absolute bottom-8 left-0 right-0 flex justify-center animate-bounce">
           <div className="flex flex-col items-center gap-2">
             <span className="text-gray-400 text-sm flex items-center gap-2">
@@ -275,6 +273,7 @@ const profile = {
             <i className="fas fa-chevron-down text-blue-400 text-xl"></i>
           </div>
         </div>
+      </section>
         <PortfolioPage />
         {/* <GitHubStats username="dimasu21" /> */}
       </main>
