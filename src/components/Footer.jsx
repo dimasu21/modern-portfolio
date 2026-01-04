@@ -1,7 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, ArrowUp } from "lucide-react";
-import { BsWhatsapp } from "react-icons/bs";
+import { Github, Linkedin, Mail, ArrowUp, Facebook, Instagram } from "lucide-react";
 import { FaKey } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { useNavigate, Link } from "react-router-dom";
@@ -26,9 +25,14 @@ const Footer = () => {
       icon: Linkedin,
     },
     {
-      name: "Whatsapp",
-      href: "https://wa.me/qr/CMB7MS5HTX2VB1",
-      icon: BsWhatsapp,
+      name: "Facebook",
+      href: "https://facebook.com/YOUR_FACEBOOK", // Ganti dengan link Facebook kamu
+      icon: Facebook,
+    },
+    {
+      name: "Instagram",
+      href: "https://instagram.com/YOUR_INSTAGRAM", // Ganti dengan link Instagram kamu
+      icon: Instagram,
     },
     {
       name: "Email",
