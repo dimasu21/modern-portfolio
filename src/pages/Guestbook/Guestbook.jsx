@@ -8,9 +8,6 @@ import { FaGoogle, FaGithub } from "react-icons/fa";
 import GridBackground from "@/components/GridBackground";
 import SEO from "@/components/SEO";
 
-// Secret admin key
-const ADMIN_SECRET = "dimasu";
-
 const Guestbook = () => {
   const { t } = useTranslation();
   const { user, signInWithGoogle, signInWithGithub, signOut, loading: authLoading } = useAuth();
@@ -19,29 +16,34 @@ const Guestbook = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [adminInput, setAdminInput] = useState("");
-  const [showAdminModal, setShowAdminModal] = useState(false);
   const [deletingId, setDeletingId] = useState(null);
 
-  // Check for admin mode in localStorage
+  // Check if user is admin (database-based, secure)
   useEffect(() => {
-    const storedAdmin = localStorage.getItem("guestbook_admin");
-    if (storedAdmin === "true") {
-      setIsAdmin(true);
-    }
-  }, []);
-
-  // Keyboard shortcut: Ctrl+Shift+A to open admin modal
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.ctrlKey && e.shiftKey && e.key === "A") {
-        e.preventDefault();
-        setShowAdminModal(true);
+    const checkAdminStatus = async () => {
+      if (!user) {
+        setIsAdmin(false);
+        return;
+      }
+      try {
+        const { data, error } = await supabase
+          .from("admins")
+          .select("email")
+          .eq("email", user.email)
+          .single();
+        if (data && !error) {
+          setIsAdmin(true);
+        } else {
+          setIsAdmin(false);
+        }
+      } catch (error) {
+        setIsAdmin(false);
       }
     };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+    if (!authLoading) {
+      checkAdminStatus();
+    }
+  }, [user, authLoading]);
 
   // Fetch messages on component mount
   useEffect(() => {
@@ -148,23 +150,9 @@ const Guestbook = () => {
     }
   };
 
-  // Handle admin login
-  const handleAdminLogin = (e) => {
-    e.preventDefault();
-    if (adminInput === ADMIN_SECRET) {
-      setIsAdmin(true);
-      localStorage.setItem("guestbook_admin", "true");
-      setShowAdminModal(false);
-      setAdminInput("");
-    } else {
-      alert("Wrong secret key!");
-    }
-  };
-
-  // Handle admin logout
+  // Admin logout (just clears state, user remains logged in)
   const handleAdminLogout = () => {
     setIsAdmin(false);
-    localStorage.removeItem("guestbook_admin");
   };
 
   // Handle delete message
@@ -208,46 +196,7 @@ const Guestbook = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-[#04081A] via-transparent to-[#04081A]" />
       </div>
 
-      {/* Admin Modal */}
-      {showAdminModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="bg-[#0a1628] border border-gray-800 rounded-2xl p-6 w-full max-w-sm mx-4"
-          >
-            <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-              <Shield className="w-5 h-5 text-teal-400" />
-              Admin Access
-            </h3>
-            <form onSubmit={handleAdminLogin}>
-              <input
-                type="password"
-                value={adminInput}
-                onChange={(e) => setAdminInput(e.target.value)}
-                placeholder="Enter secret key..."
-                className="w-full px-4 py-3 bg-[#0d1f35] border border-gray-700 rounded-xl text-white mb-4 focus:outline-none focus:border-teal-500"
-                autoFocus
-              />
-              <div className="flex gap-2">
-                <button
-                  type="submit"
-                  className="flex-1 bg-teal-500 text-white py-2 rounded-xl font-semibold hover:bg-teal-600 transition-colors"
-                >
-                  Login
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setShowAdminModal(false)}
-                  className="flex-1 bg-gray-700 text-white py-2 rounded-xl font-semibold hover:bg-gray-600 transition-colors"
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
-          </motion.div>
-        </div>
-      )}
+      {/* Admin Modal - REMOVED (now using database-based admin check) */}
 
       <div className="max-w-3xl mx-auto px-4 relative z-10">
         {/* Header */}
