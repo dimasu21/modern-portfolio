@@ -16,6 +16,7 @@ import PrivacyPage from "./pages/Legal/PrivacyPage";
 import Disclaimer from "./pages/Legal/Disclaimer";
 import Footer from "./components/Footer";
 import CursorTrail from "./components/CursorTrail";
+import ScrollToTop from "./components/ScrollToTop";
 import { Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 
@@ -24,6 +25,7 @@ export default function App() {
 
   return (
     <AuthProvider>
+      <ScrollToTop />
       {/* <CursorTrail /> */}
       <Header />
       {isOnePage ? (
