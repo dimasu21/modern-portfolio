@@ -111,5 +111,5 @@ You may share and adapt with attribution, non-commercially.
 ---
 
 <div align="center">
-  Made with ❤️ by <a href="https://dimasu.site">Dimas Tri Mulyo</a>
+  Made with by <a href="https://dimasu.site">Dimas Tri Mulyo</a>
 </div>
