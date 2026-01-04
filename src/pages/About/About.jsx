@@ -26,10 +26,10 @@ export default function About() {
             </div>
 
             <div className="relative space-y-4">
-              <p className="text-white">
+              <p className="text-white text-justify">
                 {t("about.intro")}
               </p>
-              <p className="text-white">
+              <p className="text-white text-justify">
                 {t("about.focus")}
               </p>
 
