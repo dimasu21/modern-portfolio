@@ -20,8 +20,9 @@ const getProjects = (t) => [
     description: t("projects.items.netra.description"),
     src: netraImg,
     color: "#3b82f6", // Blue
-    githubLink: "#",
+    githubLink: "", // Empty to hide
     liveLink: "https://netraku.my.id/",
+    liveLabel: t("projects.visitSite"),
   },
   {
     title: t("projects.items.house.title"),
@@ -172,6 +173,7 @@ function Card({
   targetScale,
   githubLink,
   liveLink,
+  liveLabel,
   t,
 }) {
   const container = useRef(null);
@@ -240,16 +242,18 @@ function Card({
 
             <div className="mt-8 pt-6 border-t border-gray-800/50">
               <div className="flex items-center gap-6">
-                <motion.a
-                  href={githubLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
-                  whileHover={{ x: 3 }}
-                >
-                  <Github size={20} />
-                  <span className="text-sm font-medium">{t("projects.sourceCode")}</span>
-                </motion.a>
+                {githubLink && githubLink !== "#" && githubLink !== "" && (
+                  <motion.a
+                    href={githubLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+                    whileHover={{ x: 3 }}
+                  >
+                    <Github size={20} />
+                    <span className="text-sm font-medium">{t("projects.sourceCode")}</span>
+                  </motion.a>
+                )}
 
                 {liveLink && liveLink !== "#" && (
                   <motion.a
@@ -261,7 +265,7 @@ function Card({
                     whileHover={{ x: 3 }}
                   >
                     <Globe size={20} />
-                    <span className="text-sm font-medium">{t("projects.liveDemo")}</span>
+                    <span className="text-sm font-medium">{liveLabel || t("projects.liveDemo")}</span>
                   </motion.a>
                 )}
               </div>
@@ -282,6 +286,8 @@ Card.propTypes = {
   progress: PropTypes.object.isRequired,
   range: PropTypes.array.isRequired,
   targetScale: PropTypes.number.isRequired,
-  githubLink: PropTypes.string.isRequired,
+  githubLink: PropTypes.string,
   liveLink: PropTypes.string,
+  liveLabel: PropTypes.string,
+  t: PropTypes.func.isRequired,
 };
