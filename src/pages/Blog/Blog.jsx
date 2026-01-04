@@ -91,15 +91,14 @@ export default function Blog() {
             {t("blog.description")}
           </p>
           
-          {/* Saweria Support Button */}
+          {/* Saweria Support Button - Neobrutalism Style */}
           <a
             href="https://saweria.co/dimasu"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 mt-6 px-5 py-2.5 bg-gradient-to-r from-orange-500 to-amber-500 text-white text-sm font-medium rounded-lg hover:from-orange-600 hover:to-amber-600 transition-all duration-300 hover:scale-105 shadow-lg shadow-orange-500/25"
+            className="inline-flex items-center mt-6 px-5 py-2.5 bg-orange-400 text-black text-sm font-bold rounded-md border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-150"
           >
-            <span>☕</span>
-            <span>Support Me</span>
+            Support Me
           </a>
         </motion.div>
 
