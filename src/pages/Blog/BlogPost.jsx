@@ -131,8 +131,8 @@ export default function BlogPost() {
   }
 
   return (
-    <main className="bg-[#020617] text-white min-h-screen pt-32 pb-24">
-      <article className="container mx-auto px-4 max-w-3xl">
+    <main className="bg-[#020617] text-white min-h-screen pt-32 pb-24 relative overflow-hidden isolate">
+      <article className="container mx-auto px-4 max-w-3xl relative z-10">
         
         {/* Top Back Link */}
         <div className="max-w-[65ch] mx-auto mb-10">
@@ -178,10 +178,10 @@ export default function BlogPost() {
           )}
         </header>
 
-        {/* Like Button */}
-        <div className="max-w-[65ch] mx-auto mb-8 flex justify-end">
+        {/* Like Button - Disabled for debugging */}
+        {/* <div className="max-w-[65ch] mx-auto mb-8 flex justify-end">
           <LikeButton postId={post.id} />
-        </div>
+        </div> */}
 
         {/* Content */}
         <motion.div
