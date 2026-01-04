@@ -49,8 +49,11 @@ const Footer = () => {
   return (
     <footer className="bg-[#04081A] text-white py-12 md:py-16 relative z-20 overflow-hidden">
       <div className="container mx-auto px-6 max-w-7xl">
+        {/* Gradient Divider - At Top */}
+        <div className="h-px bg-gradient-to-r from-transparent via-teal-500/50 to-transparent mb-8"></div>
+
         {/* Social Icons - Circular Style with Glow Effect */}
-        <div className="flex gap-4 mb-10">
+        <div className="flex gap-4 mb-8">
           {socialLinks.map((social) => (
             <motion.a
               key={social.name}
@@ -66,9 +69,6 @@ const Footer = () => {
             </motion.a>
           ))}
         </div>
-
-        {/* Gradient Divider */}
-        <div className="h-px bg-gradient-to-r from-transparent via-teal-500/50 to-transparent my-8"></div>
 
         {/* Navigation Links */}
         <div className="flex flex-wrap justify-start gap-x-2 gap-y-3 mb-8">
@@ -92,51 +92,52 @@ const Footer = () => {
           ))}
         </div>
 
-        {/* Copyright */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        {/* Copyright - Stacked on mobile */}
+        <div className="flex flex-col gap-4 mb-6">
           <p className="text-xs text-gray-500">
             © 2021 - Present Dimas Tri M. {t("footer.rights")}
-            <span className="mx-2">|</span>
+          </p>
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-gray-500">
             <Link to="/privacy" className="hover:text-teal-400 transition-colors">{t("footer.privacy")}</Link>
-            <span className="mx-2">•</span>
+            <span>•</span>
             <Link to="/disclaimer" className="hover:text-teal-400 transition-colors">{t("footer.disclaimer")}</Link>
-            <Link to="/admin/blog" className="ml-3 inline-flex items-center text-gray-600 hover:text-teal-400 transition-colors" aria-label="Admin Access">
+            <Link to="/admin/blog" className="ml-2 inline-flex items-center text-gray-600 hover:text-teal-400 transition-colors" aria-label="Admin Access">
               <FaKey size={12} />
             </Link>
-          </p>
-          
-          {/* Protection Badges */}
-          <div className="flex items-center gap-4">
-            {/* Creative Commons Badge */}
-            <a 
-              href="https://creativecommons.org/licenses/by-nc-sa/4.0/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-xs text-gray-500 hover:text-gray-400 transition-colors"
-              title="Creative Commons BY-NC-SA 4.0"
-            >
-              <img 
-                src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" 
-                alt="Creative Commons License" 
-                className="h-5 opacity-70 hover:opacity-100 transition-opacity"
-              />
-            </a>
-            
-            {/* DMCA Protected Badge */}
-            <a 
-              href="https://www.dmca.com/Protection/Status.aspx?ID=f8498327-bc27-4b80-9f4b-0ec1a84c96aa" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-xs text-gray-500 hover:text-gray-400 transition-colors"
-              title="DMCA.com Protection Status"
-            >
-              <img 
-                src="https://images.dmca.com/Badges/dmca-badge-w150-5x1-09.png?ID=f8498327-bc27-4b80-9f4b-0ec1a84c96aa" 
-                alt="DMCA.com Protection Status" 
-                className="h-5 opacity-70 hover:opacity-100 transition-opacity"
-              />
-            </a>
           </div>
+        </div>
+        
+        {/* Protection Badges */}
+        <div className="flex items-center gap-4">
+          {/* Creative Commons Badge */}
+          <a 
+            href="https://creativecommons.org/licenses/by-nc-sa/4.0/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-xs text-gray-500 hover:text-gray-400 transition-colors"
+            title="Creative Commons BY-NC-SA 4.0"
+          >
+            <img 
+              src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" 
+              alt="Creative Commons License" 
+              className="h-5 opacity-70 hover:opacity-100 transition-opacity"
+            />
+          </a>
+          
+          {/* DMCA Protected Badge */}
+          <a 
+            href="https://www.dmca.com/Protection/Status.aspx?ID=f8498327-bc27-4b80-9f4b-0ec1a84c96aa" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-xs text-gray-500 hover:text-gray-400 transition-colors"
+            title="DMCA.com Protection Status"
+          >
+            <img 
+              src="https://images.dmca.com/Badges/dmca-badge-w150-5x1-09.png?ID=f8498327-bc27-4b80-9f4b-0ec1a84c96aa" 
+              alt="DMCA.com Protection Status" 
+              className="h-5 opacity-70 hover:opacity-100 transition-opacity"
+            />
+          </a>
         </div>
       </div>
 
