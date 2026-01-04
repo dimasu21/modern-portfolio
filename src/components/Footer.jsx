@@ -5,7 +5,6 @@ import { BsWhatsapp } from "react-icons/bs";
 import { FaKey } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { useNavigate, Link } from "react-router-dom";
-import VisitCounter from "./VisitCounter";
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -50,13 +49,6 @@ const Footer = () => {
   return (
     <footer className="bg-[#04081A] text-white py-12 md:py-16 relative z-20 overflow-hidden">
       <div className="container mx-auto px-6 max-w-7xl">
-        {/* Logo/Name Section - Gradient Text */}
-        <div className="mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-wide bg-gradient-to-r from-teal-400 via-blue-400 to-purple-500 bg-clip-text text-transparent">
-            dimasu.dev
-          </h2>
-        </div>
-
         {/* Social Icons - Circular Style with Glow Effect */}
         <div className="flex gap-4 mb-10">
           {socialLinks.map((social) => (
@@ -98,11 +90,6 @@ const Footer = () => {
               )}
             </React.Fragment>
           ))}
-        </div>
-
-        {/* Visit Counter */}
-        <div className="mb-6">
-          <VisitCounter />
         </div>
 
         {/* Copyright */}
