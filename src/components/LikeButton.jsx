@@ -87,7 +87,7 @@ export default function LikeButton({ postId }) {
     <motion.button
       onClick={handleLike}
       disabled={isLoading}
-      className={`relative group flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-300 ${
+      className={`relative group flex items-center gap-1.5 px-3 py-1.5 rounded-full border transition-all duration-300 ${
         liked
           ? "bg-red-500/10 border-red-500/50 text-red-500"
           : "bg-gray-900 border-gray-700 text-gray-400 hover:border-red-500/50 hover:text-red-400"
