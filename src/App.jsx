@@ -22,7 +22,6 @@ const Service = lazy(() => import("./pages/Service/Service"));
 const Guestbook = lazy(() => import("./pages/Guestbook/Guestbook"));
 const PrivacyPage = lazy(() => import("./pages/Legal/PrivacyPage"));
 const Disclaimer = lazy(() => import("./pages/Legal/Disclaimer"));
-const ProjectDetail = lazy(() => import("./pages/Projects/ProjectDetail"));
 
 // Loading fallback component
 const PageLoader = () => (
@@ -76,7 +75,6 @@ export default function App() {
               <Route path="/certificate" element={<Certificate />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/projects" element={<Projects />} />
-              <Route path="/projects/:slug" element={<ProjectDetail />} />
               <Route path="/service" element={<Service />} />
               <Route path="/guestbook" element={<Guestbook />} />
               <Route path="/privacy" element={<PrivacyPage />} />
