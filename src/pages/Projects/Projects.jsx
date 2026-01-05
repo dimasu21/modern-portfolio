@@ -6,6 +6,8 @@ import { Github, Globe } from "lucide-react";
 import GridBackground from "@/components/GridBackground";
 import { useTranslation } from "react-i18next";
 import SEO from "@/components/SEO";
+import { Link } from "react-router-dom";
+import { ArrowUpRight } from "lucide-react";
 
 // --- ASSETS IMPORT ---
 import houseImg from "../../assets/images/pratinjau.png";
@@ -24,6 +26,7 @@ const getProjects = (t) => [
     githubLink: "", // Empty to hide
     liveLink: "https://netraku.my.id/",
     liveLabel: t("projects.visitSite"),
+    id: "netraku", // For Case Study link
   },
   {
     title: t("projects.items.house.title"),
@@ -158,6 +161,7 @@ export default function Projects() {
                 range={[i * 0.25, 1]}
                 targetScale={targetScale}
                 t={t}
+                caseStudyLink={project.id ? `/projects/${project.id}` : null}
               />
             );
           })}
@@ -180,6 +184,7 @@ function Card({
   liveLink,
   liveLabel,
   t,
+  caseStudyLink,
 }) {
   const container = useRef(null);
   const scale = useTransform(progress, range, [1, targetScale]);
@@ -262,7 +267,18 @@ function Card({
             </div>
 
             <div className="mt-8 pt-6 border-t border-gray-800/50">
-              <div className="flex items-center gap-6">
+              <div className="flex flex-wrap items-center gap-4 md:gap-6">
+                {caseStudyLink && (
+                  <Link to={caseStudyLink}>
+                    <motion.div
+                      className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors border border-white/10"
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      <span className="text-sm font-medium">Read Case Study</span>
+                      <ArrowUpRight size={16} />
+                    </motion.div>
+                  </Link>
+                )}
                 {githubLink && githubLink !== "#" && githubLink !== "" && (
                   <motion.a
                     href={githubLink}
@@ -311,4 +327,5 @@ Card.propTypes = {
   liveLink: PropTypes.string,
   liveLabel: PropTypes.string,
   t: PropTypes.func.isRequired,
+  caseStudyLink: PropTypes.string,
 };
