@@ -7,8 +7,9 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 
+import Hero from "./pages/Hero/Hero";
 // Lazy load pages for code splitting (reduces initial bundle size)
-const Hero = lazy(() => import("./pages/Hero/Hero"));
+// const Hero = lazy(() => import("./pages/Hero/Hero"));
 const Blog = lazy(() => import("./pages/Blog/Blog"));
 const BlogPost = lazy(() => import("./pages/Blog/BlogPost"));
 const BlogAdmin = lazy(() => import("./pages/BlogAdmin/BlogAdmin"));
