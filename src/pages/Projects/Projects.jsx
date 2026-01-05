@@ -1,6 +1,6 @@
 import { ReactLenis } from "lenis/react";
 import { useTransform, motion, useScroll } from "framer-motion";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Github, Globe } from "lucide-react";
 import GridBackground from "@/components/GridBackground";
@@ -183,6 +183,7 @@ function Card({
 }) {
   const container = useRef(null);
   const scale = useTransform(progress, range, [1, targetScale]);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
     <div
@@ -206,10 +207,25 @@ function Card({
         <div className="w-full flex flex-col md:flex-row bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden shadow-2xl group">
           {/* Image Section */}
           <div className="w-full md:w-[55%] h-[250px] md:h-[400px] lg:h-[450px] relative overflow-hidden">
+            {/* Skeleton Placeholder */}
+            {!imageLoaded && (
+              <div className="absolute inset-0 bg-gray-800 animate-pulse">
+                <div className="absolute inset-0 bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 animate-shimmer" 
+                     style={{ 
+                       backgroundSize: '200% 100%',
+                       animation: 'shimmer 1.5s infinite'
+                     }} 
+                />
+              </div>
+            )}
             <motion.img
               src={url}
               alt={title}
-              className="w-full h-full object-cover"
+              loading="lazy"
+              onLoad={() => setImageLoaded(true)}
+              className={`w-full h-full object-cover transition-opacity duration-500 ${
+                imageLoaded ? 'opacity-100' : 'opacity-0'
+              }`}
               initial={{ scale: 1 }}
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.4 }}
