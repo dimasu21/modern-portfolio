@@ -6,6 +6,247 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Theme utility classes */
+.dark {
+  --theme-bg: #101214;
+  --theme-bg-secondary: #181a1c;
+  --theme-bg-card: #1c1e20;
+  --theme-text: #ffffff;
+  --theme-text-muted: #9CA3AF;
+  --theme-accent: #9CA3AF;
+  --theme-border: #374151;
+}
+
+.light {
+  --theme-bg: #eff1f5;
+  --theme-bg-secondary: #e5e7eb;
+  --theme-bg-card: #ffffff;
+  --theme-text: #101214;
+  --theme-text-muted: #4b5563;
+  --theme-accent: #101214;
+  --theme-border: #d1d5db;
+}
+
+/* Apply theme variables */
+.bg-theme-bg { background-color: var(--theme-bg); }
+.bg-theme-secondary { background-color: var(--theme-bg-secondary); }
+.bg-theme-card { background-color: var(--theme-bg-card); }
+.text-theme-text { color: var(--theme-text); }
+.text-theme-text-muted { color: var(--theme-text-muted); }
+.border-theme-border { border-color: var(--theme-border); }
+.border-theme-accent { border-color: var(--theme-accent); }
+
+/* Light mode comprehensive overrides */
+.light .hero-badge span { color: #101214 !important; } /* Flipwords text */
+.light .FlipWords { color: #101214 !important; } /* Force FlipWords to be black */
+
+/* Skill Title Fix */
+.light .skill-title {
+  background: none !important;
+  -webkit-text-fill-color: #101214 !important;
+  color: #101214 !important;
+}
+
+.light .text-white { color: #101214 !important; }
+.light .text-gray-100 { color: #111827 !important; } /* Darker for better contrast */
+.light .text-gray-200 { color: #1f2937 !important; }
+.light .text-gray-300 { color: #374151 !important; }
+.light .text-gray-400 { color: #4b5563 !important; } /* Darkened from #6b7280 */
+.light .text-gray-500 { color: #6b7280 !important; }
+
+/* Borders */
+.light .border-white { border-color: #d1d5db !important; } 
+.light .border-gray-700 { border-color: #d1d5db !important; }
+.light .border-gray-800 { border-color: #e5e7eb !important; }
+.light .border-white\/10 { border-color: rgba(0,0,0,0.1) !important; }
+.light .border-white\/30 { border-color: rgba(0,0,0,0.2) !important; }
+
+/* Backgrounds */
+.light .bg-white { background-color: #f3f4f6 !important; }
+/* Fix Inputs: Make them white with border in light mode */
+.light .bg-white\/5 { 
+  background-color: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+}
+.light .bg-white\/10 { background-color: rgba(0,0,0,0.05) !important; }
+.light .bg-white\/20 { background-color: rgba(0,0,0,0.1) !important; }
+.light .bg-black\/20 { background-color: rgba(0,0,0,0.05) !important; }
+.light .bg-black\/40 { background-color: rgba(0,0,0,0.1) !important; }
+
+/* Code Window - KEEP DARK */
+.light .code-window { background: #0d1117 !important; }
+.light .window-header { background: #1f2937 !important; }
+.light .code-window .text-gray-200, 
+.light .code-window .text-gray-400,
+.light .code-window .text-pink-400,
+.light .code-window .text-green-400,
+.light .code-window .text-blue-400,
+.light .code-window .text-yellow-400,
+.light .code-window .text-purple-400 { 
+  color: unset !important; /* Revert text color overrides inside code window */
+}
+/* Ensure code syntax colors remain correct in light mode */
+.light pre[class*="language-"] { background: #0d1117 !important; }
+
+.light .bg-gray-800 { background-color: #e5e7eb !important; }
+.light .bg-gray-900 { background-color: #f3f4f6 !important; }
+
+.light .hover\:bg-white:hover { background-color: #101214 !important; }
+.light .hover\:text-white:hover { color: #101214 !important; }
+
+.light .gradient-text { 
+  background: linear-gradient(90deg, #000000, #4b5563, #000000) !important;
+  background-size: 200% auto !important;
+  animation: gradient-shift 4s linear infinite !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+}
+
+/* Certificate Badge Fixes - Neobrutalism */
+.light .cert-badge {
+  background-color: #ffffff !important;
+  border-color: #101214 !important;
+  color: #101214 !important;
+  border-width: 1px !important;
+  box-shadow: 2px 2px 0px 0px #101214 !important; /* Small shadow for depth */
+}
+
+/* Certificate View Button - Neobrutalism */
+.light .cert-btn {
+  background-color: #ffffff !important;
+  color: #101214 !important;
+  border-color: #101214 !important;
+  box-shadow: 3px 3px 0px 0px #101214 !important;
+}
+.light .cert-btn:hover {
+  background-color: #f3f4f6 !important;
+  box-shadow: 1px 1px 0px 0px #101214 !important;
+  box-shadow: 1px 1px 0px 0px #101214 !important;
+  transform: translate(2px, 2px); 
+}
+
+/* Language Switcher - Neobrutalism */
+.light .lang-btn {
+  background-color: #ffffff !important;
+  color: #101214 !important;
+  border-color: #101214 !important;
+  box-shadow: 2px 2px 0px 0px #101214 !important;
+}
+.light .lang-btn:hover {
+  background-color: #f3f4f6 !important;
+  box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+/* Project Number Badge - Neobrutalism */
+.light .project-badge {
+  background-color: #ffffff !important;
+  color: #101214 !important;
+  border-color: #101214 !important;
+  box-shadow: 2px 2px 0px 0px #101214 !important;
+}
+
+/* Ensure typing effect cursor is dark in light mode */
+.light .typing-effect::after {
+  color: #101214 !important;
+}
+.light .navbar-gradient { background: rgba(239,241,245,0.9) !important; }
+
+/* Hide elements that are dark-mode only (glare, blurs, etc) */
+.light .dark-only { display: none !important; }
+.light .bg-radial-gradient { opacity: 0 !important; }
+
+/* Light mode floating badges and buttons */
+.light .text-teal-400 { color: #0d9488 !important; }
+.light .text-blue-400 { color: #3b82f6 !important; }
+.light .text-amber-400 { color: #f59e0b !important; }
+.light .border-teal-500\/20 { border-color: rgba(13,148,136,0.3) !important; }
+.light .border-blue-500\/20 { border-color: rgba(59,130,246,0.3) !important; }
+.light .border-amber-500\/20 { border-color: rgba(245,158,11,0.3) !important; }
+.light .bg-teal-500\/10 { background-color: rgba(13,148,136,0.15) !important; }
+.light .bg-blue-500\/10 { background-color: rgba(59,130,246,0.15) !important; }
+.light .bg-amber-500\/10 { background-color: rgba(245,158,11,0.15) !important; }
+
+/* Light mode shadows and cards */
+.light .shadow-white\/10 { box-shadow: 0 4px 6px -1px rgba(16,18,20,0.1) !important; }
+.light .bg-\[\#1c1e20\] { background-color: #ffffff !important; }
+.light .bg-\[\#181a1c\] { background-color: #e5e7eb !important; }
+.light .border-\[\#9CA3AF\] { border-color: #101214 !important; }
+.light .text-\[\#9CA3AF\] { color: #4b5563 !important; }
+.light .bg-\[\#9CA3AF\] { background-color: #1f2937 !important; }
+
+/* Blog Content Fixes - Force Black in Light Mode */
+.light .blog-content { color: #1f2937 !important; } 
+
+.light .blog-content h1, 
+.light .blog-content h2, 
+.light .blog-content h3, 
+.light .blog-content h4, 
+.light .blog-content strong, 
+.light .blog-content b { color: #111827 !important; }
+
+.light .blog-content li,
+.light .blog-content p { color: #374151 !important; }
+
+/* Override Quill Size Classes which have !important in blog-content.css */
+.light .blog-content .ql-size-small { color: #4b5563 !important; }
+.light .blog-content .ql-size-large { color: #1f2937 !important; }
+.light .blog-content .ql-size-huge { color: #111827 !important; }
+
+/* Fix Links in Light Mode */
+.light .blog-content a { color: #2563eb !important; border-bottom-color: rgba(37,99,235,0.3) !important; }
+.light .blog-content a:hover { color: #1d4ed8 !important; border-bottom-color: #1d4ed8 !important; }
+
+/* Caption Fix */
+.light .blog-content .ql-align-center.ql-size-small { color: #6b7280 !important; }
+
+/* Invert Header active link background */
+.light .bg-\[\#9CA3AF\]\/15 { background-color: rgba(31,41,55,0.1) !important; }
+.light .hover\:bg-\[\#9CA3AF\]\/10:hover { background-color: rgba(31,41,55,0.05) !important; }
+
+
+/* Invert Green Buttons (GitHub style) */
+.light .bg-\[\#238636\] { background-color: #1a7f37 !important; }
+.light .hover\:bg-\[\#2ea043\]:hover { background-color: #2c974b !important; }
+
+/* Support Me Button - Neobrutalism Black & White in Light Mode */
+.light .support-btn {
+  background-color: #ffffff !important;
+  color: #101214 !important;
+  border-color: #101214 !important;
+  box-shadow: 3px 3px 0px 0px #101214 !important;
+}
+.light .support-btn:hover {
+  box-shadow: 1px 1px 0px 0px #101214 !important;
+  background-color: #f3f4f6 !important;
+}
+
+/* Creator Badge - Neobrutalism Black & White in Light Mode */
+.light .creator-badge {
+  background-color: #ffffff !important;
+  color: #101214 !important;
+  border: 1px solid #101214 !important;
+  box-shadow: 2px 2px 0px 0px #101214 !important;
+}
+
+/* Back To Top Button - Neobrutalism Black & White in Light Mode */
+.light .back-to-top-btn {
+  background-color: #ffffff !important;
+  color: #101214 !important;
+  border-color: #101214 !important;
+  box-shadow: 4px 4px 0px 0px #101214 !important;
+}
+.light .back-to-top-btn:hover {
+  background-color: #f3f4f6 !important;
+  box-shadow: none !important;
+}
+
+/* Invert Guestbook/Blog specific dark backgrounds */
+.light .bg-\[\#020617\] { background-color: #eff1f5 !important; }
+.light .bg-\[\#252729\] { background-color: #f3f4f6 !important; }
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -83,6 +324,9 @@
   }
 }
 
+
+
+
 /* 4. Sisa Keyframes & Custom CSS Anda */
 @keyframes float-slow {
   0%,
@@ -105,7 +349,7 @@
   }
 }
 .gradient-text {
-  background: linear-gradient(90deg, #60a5fa, #34d399, #60a5fa);
+  background: linear-gradient(90deg, #9CA3AF, #a3a3a3, #9CA3AF);
   background-size: 200% auto;
   animation: gradient-shift 4s linear infinite;
   -webkit-background-clip: text;
@@ -114,8 +358,8 @@
 }
 .hero-gradient-border {
   position: relative;
-  background: linear-gradient(45deg, #60a5fa, #34d399);
-  padding: 2px;
+  background: #9CA3AF;
+  padding: 1px;
   border-radius: 0.75rem;
 }
 .nav-link {
@@ -125,10 +369,10 @@
   content: "";
   position: absolute;
   width: 0;
-  height: 2px;
+  height: 3px;
   bottom: -4px;
   left: 0;
-  background: linear-gradient(45deg, #60a5fa, #34d399);
+  background: #9CA3AF;
   transition: width 0.3s ease;
 }
 .nav-link:hover::after {
@@ -140,9 +384,12 @@
   overflow: hidden;
   transition: all 0.3s ease;
 }
+.code-window pre[class*="language-"] {
+  background: #0d1117 !important;
+}
 .window-header {
-  background: #0b466359;
-  padding: 0.75rem;
+  background: #1f2937;
+  padding: 0.75rem 1rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -175,7 +422,7 @@
   content: "|";
   animation: blink 1s step-end infinite;
   margin-left: 2px;
-  color: #60a5fa;
+  color: #9CA3AF;
 }
 @keyframes blink {
   from,

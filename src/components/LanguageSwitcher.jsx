@@ -14,7 +14,7 @@ const LanguageSwitcher = () => {
   return (
     <motion.button
       onClick={toggleLanguage}
-      className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-gray-800/50 border border-gray-700/50 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 transition-all duration-300"
+      className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-gray-800/50 border border-gray-700/50 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 transition-all duration-300 lang-btn"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       title={i18n.language === "en" ? "Switch to Indonesian" : "Switch to English"}

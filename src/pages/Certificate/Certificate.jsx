@@ -105,15 +105,15 @@ const CertificateSection = () => {
   };
 
   return (
-    <section className="min-h-screen relative overflow-hidden py-20 bg-[#04081A]">
+    <section className="min-h-screen relative overflow-hidden py-20 bg-theme-bg">
       <SEO 
         title="Certificates" 
         description="Certifications and achievements in Web Development and AI."
       />
       {/* Grid Background */}
       <div className="absolute inset-0 z-0">
-        <GridBackground />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#04081A] via-transparent to-[#04081A]" />
+        {/* <GridBackground /> */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-[#0a0a0a] dark-only" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 relative z-10">
@@ -143,9 +143,9 @@ const CertificateSection = () => {
             <motion.div
               key={index}
               variants={cardVariants}
-              className={`relative border rounded-xl p-6 transition-all duration-300 bg-gray-900/50 backdrop-blur-sm flex flex-col h-full group ${hoveredIndex === index
-                ? "border-teal-500 scale-[1.02] shadow-lg shadow-teal-500/10"
-                : "border-blue-400/20"
+              className={`relative border rounded-xl p-6 transition-all duration-300 bg-theme-card backdrop-blur-sm flex flex-col h-full group ${hoveredIndex === index
+                ? "border-white scale-[1.02] shadow-lg shadow-white/10"
+                : "border-white/20"
                 }`}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
@@ -154,9 +154,6 @@ const CertificateSection = () => {
                 {/* Header: Icon & External Link Icon */}
                 <div className="flex justify-between items-start">
                   <div className="flex items-center gap-3">
-                    <span className="text-3xl bg-gray-800 rounded-lg p-2">
-                      {cert.mascot}
-                    </span>
                     <h3 className="text-xl font-bold text-white leading-tight">
                       {cert.title}
                     </h3>
@@ -166,39 +163,29 @@ const CertificateSection = () => {
                     href={cert.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-500 hover:text-teal-400 transition-colors"
+                    className="text-gray-500 hover:text-white transition-colors"
                   >
                     <ArrowUpRight size={20} />
                   </a>
                 </div>
 
                 <div className="flex justify-between items-center pt-2">
-                  <p className="text-md text-teal-400 flex items-center gap-2 font-medium">
+                  <p className="text-md text-white flex items-center gap-2 font-medium">
                     <BookOpen className="w-4 h-4" />
                     {cert.issuer}
                   </p>
-                  <p className="text-gray-500 text-sm flex items-center gap-1 bg-gray-800/50 px-2 py-1 rounded">
+                  {/* Year Badge - Standardized with cert-badge */}
+                  <p className="px-2 py-1 text-xs rounded bg-white/10 text-white border border-white/20 cert-badge flex items-center gap-1">
                     <Calendar className="w-3 h-3" />
                     {cert.year}
                   </p>
                 </div>
 
-                <p className="text-gray-400 text-sm italic border-l-2 border-teal-500 pl-3 py-1">
+                <p className="text-gray-400 text-sm italic border-l-2 border-white pl-3 py-1">
                   {cert.description}
                 </p>
 
-                {/* Achievements Tags */}
-                <div className="flex flex-wrap gap-2 pt-2">
-                  {cert.achievements.map((ach, i) => (
-                    <div
-                      key={i}
-                      className="px-2 py-1 rounded text-xs font-medium bg-yellow-500/10 text-yellow-500 flex items-center gap-1"
-                    >
-                      <Trophy className="w-3 h-3" />
-                      {ach}
-                    </div>
-                  ))}
-                </div>
+
               </div>
 
               {/* Bagian Bawah: Tombol & Skills */}
@@ -208,7 +195,7 @@ const CertificateSection = () => {
                   href={cert.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full text-center bg-gray-800 hover:bg-teal-500 hover:text-white text-teal-400 py-2 rounded-lg transition-all duration-300 text-sm font-semibold flex items-center justify-center gap-2 border border-gray-700 hover:border-teal-500"
+                  className="w-full text-center bg-gray-800 hover:bg-white hover:text-black text-white py-2 rounded-lg transition-all duration-300 text-sm font-semibold flex items-center justify-center gap-2 border border-gray-700 hover:border-white cert-btn"
                 >
                   <ExternalLink size={14} />
                   {t("certificate.viewCertificate")}
@@ -220,7 +207,7 @@ const CertificateSection = () => {
                     {cert.skills.map((skill, i) => (
                       <span
                         key={i}
-                        className="px-2 py-1 text-xs rounded bg-blue-500/10 text-blue-300 border border-blue-500/20"
+                        className="px-2 py-1 text-xs rounded bg-white/10 text-white border border-white/20 cert-badge"
                       >
                         {skill}
                       </span>

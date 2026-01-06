@@ -202,15 +202,15 @@ const Guestbook = () => {
   };
 
   return (
-    <section className="min-h-screen relative overflow-hidden py-20 bg-[#04081A]">
+    <section className="min-h-screen relative overflow-hidden py-20 bg-theme-bg">
       <SEO 
         title="Guestbook" 
         description="Sign the guestbook and leave a message!"
       />
       {/* Grid Background */}
       <div className="absolute inset-0 z-0">
-        <GridBackground />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#04081A] via-transparent to-[#04081A]" />
+        {/* <GridBackground /> */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#101214] via-transparent to-[#101214] dark-only" />
       </div>
 
       {/* Admin Modal - REMOVED (now using database-based admin check) */}
@@ -233,9 +233,9 @@ const Guestbook = () => {
           
           {/* Admin indicator */}
           {isAdmin && (
-            <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-teal-500/20 border border-teal-500/30 rounded-full">
-              <Shield className="w-4 h-4 text-teal-400" />
-              <span className="text-teal-400 text-sm font-medium">Admin Mode</span>
+            <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-white/20 border border-white/30 rounded-full">
+              <Shield className="w-4 h-4 text-white" />
+              <span className="text-white text-sm font-medium">Admin Mode</span>
               <button
                 onClick={handleAdminLogout}
                 className="ml-2 text-xs text-gray-400 hover:text-white underline"
@@ -255,7 +255,7 @@ const Guestbook = () => {
                   className="w-8 h-8 rounded-full"
                 />
               ) : (
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-teal-500 to-blue-500 flex items-center justify-center text-white text-sm font-semibold">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-white to-white flex items-center justify-center text-white text-sm font-semibold">
                   {getUserName().charAt(0).toUpperCase()}
                 </div>
               )}
@@ -280,7 +280,7 @@ const Guestbook = () => {
           className="space-y-6 mb-8"
         >
           {isLoading ? (
-            <div className="flex flex-col items-center justify-center py-16 bg-[#0a1628] rounded-2xl border border-gray-800">
+            <div className="flex flex-col items-center justify-center py-16 bg-theme-card rounded-2xl border border-gray-800">
               {/* Cute Loading Icon - Octocat style */}
               <div className="mb-4 text-gray-500">
                 <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor" className="animate-bounce">
@@ -311,7 +311,7 @@ const Guestbook = () => {
                     className="w-10 h-10 rounded-full flex-shrink-0"
                   />
                 ) : (
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-semibold flex-shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-gray-600 to-gray-500 flex items-center justify-center text-white font-semibold flex-shrink-0">
                     {msg.name.charAt(0).toUpperCase()}
                   </div>
                 )}
@@ -322,7 +322,7 @@ const Guestbook = () => {
                     <span className="font-medium text-white">{msg.name}</span>
                     {/* Creator badge for admin */}
                     {msg.name === "Dimas Tri Mulyo" && (
-                      <span className="px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide bg-gradient-to-r from-teal-500 to-blue-500 text-white rounded">
+                      <span className="px-1 py-0.5 text-[8px] font-bold uppercase tracking-wide bg-gray-500 text-black rounded creator-badge">
                         Creator
                       </span>
                     )}
@@ -346,7 +346,7 @@ const Guestbook = () => {
                   </div>
                   
                   {/* Message Bubble */}
-                  <div className="mt-1 inline-block bg-[#0a1628] rounded-2xl rounded-tl-sm px-4 py-2 max-w-full">
+                  <div className="mt-1 inline-block bg-theme-card rounded-2xl rounded-tl-sm px-4 py-2 max-w-full">
                     <p className="text-gray-200 break-words">{msg.message}</p>
                   </div>
                 </div>
@@ -378,7 +378,7 @@ const Guestbook = () => {
                   className="w-10 h-10 rounded-full flex-shrink-0"
                 />
               ) : (
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-500 to-blue-500 flex items-center justify-center text-white font-semibold flex-shrink-0">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-white to-white flex items-center justify-center text-white font-semibold flex-shrink-0">
                   {getUserName().charAt(0).toUpperCase()}
                 </div>
               )}
@@ -388,7 +388,7 @@ const Guestbook = () => {
                   value={newMessage}
                   onChange={(e) => setNewMessage(e.target.value)}
                   placeholder="Type your message..."
-                  className="w-full px-4 py-3 bg-[#0a1628] border border-gray-800 rounded-full text-white placeholder-gray-500 focus:outline-none focus:border-gray-600 transition-colors pr-12"
+                  className="w-full px-4 py-3 bg-theme-card border border-gray-800 rounded-full text-white placeholder-gray-500 focus:outline-none focus:border-gray-600 transition-colors pr-12"
                   maxLength={500}
                   disabled={isSubmitting}
                 />
@@ -408,7 +408,7 @@ const Guestbook = () => {
             </form>
           ) : (
             /* Sign In Section for guests - GitHub style */
-            <div className="bg-[#0a1628] border border-gray-800 rounded-xl overflow-hidden">
+            <div className="bg-theme-card border border-gray-800 rounded-xl overflow-hidden">
               {/* Header */}
               <div className="flex items-center justify-between border-b border-gray-800 px-4">
                 <span className="px-4 py-3 text-sm font-medium text-white">

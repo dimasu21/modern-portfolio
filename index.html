@@ -22,9 +22,32 @@
   <!-- Preload critical fonts for faster FCP -->
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Space+Grotesk:wght@300..700&display=swap">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+  <!-- Theme Script to Prevent FOUC (Flash of Unstyled Content) -->
+  <script>
+    (function() {
+      try {
+        const savedTheme = localStorage.getItem("theme");
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        const theme = savedTheme || systemTheme;
+        
+        if (theme === "light") {
+          document.documentElement.classList.add("light");
+          document.documentElement.classList.remove("dark");
+          // Immediately set background to avoid flash
+          document.documentElement.style.backgroundColor = "#eff1f5"; 
+        } else {
+          document.documentElement.classList.add("dark");
+          document.documentElement.classList.remove("light");
+          // Immediately set background to avoid flash
+          document.documentElement.style.backgroundColor = "#020617";
+        }
+      } catch (e) {
+        console.error("Theme script failed", e);
+      }
+    })();
+  </script>
 </head>
-
-<body style="background-color: #020617;">
+<body>
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
 </body>

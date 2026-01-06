@@ -7,7 +7,7 @@ export default function Disclaimer() {
   const { t } = useTranslation();
 
   return (
-    <main className="min-h-screen bg-[#020617] text-gray-300 pt-32 pb-16 px-4">
+    <main className="min-h-screen bg-theme-bg text-gray-300 pt-32 pb-16 px-4">
       <SEO title="Disclaimer" description="Disclaimer for Dimas Tri Mulyo's Portfolio" />
       <div className="container mx-auto max-w-4xl">
         <motion.div
@@ -15,7 +15,7 @@ export default function Disclaimer() {
           animate={{ opacity: 1, y: 0 }}
           className="prose prose-invert lg:prose-xl mx-auto"
         >
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent mb-8">
+          <h1 className="text-4xl font-bold text-white mb-8">
             {t("disclaimer.title")}
           </h1>
           

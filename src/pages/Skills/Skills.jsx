@@ -20,16 +20,16 @@ import { MdAnimation } from "react-icons/md";
 import { FcWorkflow } from "react-icons/fc";
 
 const SkillCard = ({ icon: Icon, title, skills, color }) => (
-  <Card className="group relative overflow-hidden bg-gray-900/80 border-gray-700 hover:scale-[1.02] transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/20">
-    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[rgba(100,100,255,0.1)] to-transparent group-hover:via-[rgba(100,100,255,0.2)] animate-shimmer"></div>
+  <Card className="group relative overflow-hidden bg-theme-card border-gray-700 hover:scale-[1.02] transition-all duration-300 hover:shadow-xl hover:shadow-white/10">
+    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:via-white/10 animate-shimmer dark-only"></div>
     <CardContent className="p-6 relative z-10">
       <div className="flex items-center gap-4 mb-6">
         <div
-          className={`p-3 rounded-xl bg-gray-800/50 ${color} group-hover:scale-110 transition-transform duration-300`}
+          className={`p-3 rounded-xl bg-theme-card ${color} group-hover:scale-110 transition-transform duration-300`}
         >
           <Icon className="w-8 h-8" />
         </div>
-        <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
+        <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 skill-title">
           {title}
         </h3>
       </div>
@@ -38,7 +38,7 @@ const SkillCard = ({ icon: Icon, title, skills, color }) => (
           <Badge
             key={index}
             variant="outline"
-            className="group/badge relative bg-gray-800/50 hover:bg-gray-700/80 text-gray-100 border-gray-600 flex items-center gap-2 py-2 px-3 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20"
+            className="group/badge relative bg-theme-card hover:bg-gray-700/80 text-theme-text border-gray-600 flex items-center gap-2 py-2 px-3 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white/10"
           >
             <span className="transform group-hover/badge:scale-110 transition-transform duration-300">
               {skill.icon}
@@ -164,13 +164,13 @@ const SkillsSection = () => {
   ];
 
   return (
-    <main className="pt-15 lg:pt-0 text-white min-h-screen bg-[#04081A] relative">
+    <main className="pt-15 lg:pt-0 text-white min-h-screen bg-theme-bg relative">
       <SEO 
         title="Skills" 
         description="Technical skills and technology stack of Dimas Tri Mulyo - Frontend, Backend, AI, & DevOps."
       />
-      {/* Grid Background */}
-      <div className="absolute inset-0 skills-grid-pattern opacity-20 pointer-events-none"></div>
+      {/* Grid Background - Disabled */}
+      {/* <div className="absolute inset-0 skills-grid-pattern opacity-20 pointer-events-none"></div> */}
 
       <section className="container mx-auto px-4 py-11 relative z-10">
         <div className="flex justify-center items-center">

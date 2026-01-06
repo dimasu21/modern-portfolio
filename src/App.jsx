@@ -6,6 +6,8 @@ import ScrollToTop from "./components/ScrollToTop";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
+import { ThemeProvider } from "./context/ThemeContext";
+import ThemeTransition from "./components/ThemeTransition";
 
 import Hero from "./pages/Hero/Hero";
 // Lazy load pages for code splitting (reduces initial bundle size)
@@ -25,10 +27,10 @@ const Disclaimer = lazy(() => import("./pages/Legal/Disclaimer"));
 
 // Loading fallback component
 const PageLoader = () => (
-  <div className="min-h-screen bg-[#020617] flex items-center justify-center">
+  <div className="min-h-screen bg-theme-bg flex items-center justify-center">
     <div className="flex flex-col items-center gap-4">
-      <div className="w-10 h-10 border-4 border-teal-400 border-t-transparent rounded-full animate-spin"></div>
-      <span className="text-gray-400 text-sm">Loading...</span>
+      <div className="w-10 h-10 border-4 border-theme-accent border-t-transparent rounded-full animate-spin"></div>
+      <span className="text-theme-text-muted text-sm">Loading...</span>
     </div>
   </div>
 );
@@ -48,13 +50,15 @@ export default function App() {
 
   return (
     <ErrorBoundary>
-      <AuthProvider>
-        <ScrollToTop />
-        <div 
-          className={`min-h-screen bg-[#020617] transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-        >
-        {/* <CursorTrail /> */}
-        <Header />
+      <ThemeProvider>
+        <ThemeTransition />
+        <AuthProvider>
+          <ScrollToTop />
+          <div 
+            className={`min-h-screen bg-theme-bg transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+          >
+          {/* <CursorTrail /> */}
+          <Header />
         <Suspense fallback={<PageLoader />}>
           {isOnePage ? (
             <>
@@ -85,6 +89,7 @@ export default function App() {
         <Footer />
         </div>
       </AuthProvider>
+      </ThemeProvider>
     </ErrorBoundary>
   );
 }

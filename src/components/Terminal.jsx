@@ -143,7 +143,7 @@ LinkedIn : linkedin.com/in/dimas-tri-mulyo-1283a5392`,
     >
       <div className="rounded-xl overflow-hidden shadow-2xl border border-gray-700/50">
         {/* Terminal Header */}
-        <div className="bg-gray-800 px-4 py-3 flex items-center gap-2">
+        <div className="bg-[#1f2937] px-4 py-3 flex items-center gap-2">
           <div className="flex gap-2">
             <div className="w-3 h-3 rounded-full bg-red-500"></div>
             <div className="w-3 h-3 rounded-full bg-yellow-500"></div>

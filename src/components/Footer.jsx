@@ -52,7 +52,7 @@ const Footer = () => {
 
   return (
     <footer 
-      className="bg-[#04081A] text-white py-12 md:py-16 relative z-20"
+      className="bg-theme-secondary text-white py-12 md:py-16 relative z-20 border-t-4 border-[#9CA3AF]"
       style={{ 
         transform: 'translateZ(0)', 
         backfaceVisibility: 'hidden',
@@ -70,7 +70,7 @@ const Footer = () => {
               href={social.href}
               target={social.name !== "Email" ? "_blank" : undefined}
               rel={social.name !== "Email" ? "noopener noreferrer" : undefined}
-              className="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center text-gray-400 hover:text-teal-400 hover:border-teal-400 hover:shadow-[0_0_15px_rgba(45,212,191,0.5)] transition-all duration-300"
+              className="w-10 h-10 rounded-none border-2 border-[#9CA3AF] flex items-center justify-center text-gray-400 hover:bg-[#9CA3AF] hover:text-black transition-all duration-300 shadow-[2px_2px_0px_0px_rgba(163,163,163,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]"
               whileHover={{ scale: 1.1, y: -3 }}
               whileTap={{ scale: 0.95 }}
               aria-label={social.name}
@@ -91,7 +91,7 @@ const Footer = () => {
                   navigate(link.href);
                   window.scrollTo({ top: 0, behavior: "smooth" });
                 }}
-                className="text-xs md:text-sm text-gray-400 hover:text-teal-400 transition-colors duration-300 uppercase tracking-wider cursor-pointer"
+                className="text-xs md:text-sm text-gray-400 hover:text-white transition-colors duration-300 uppercase tracking-wider cursor-pointer"
               >
                 {link.name}
               </a>
@@ -154,7 +154,7 @@ const Footer = () => {
       {/* Back to Top Button */}
       <motion.button
         onClick={scrollToTop}
-        className="absolute right-6 bottom-6 md:right-10 md:bottom-10 w-12 h-12 rounded-full bg-gradient-to-r from-teal-500 to-blue-500 flex items-center justify-center text-white shadow-lg hover:shadow-teal-500/30 transition-all duration-300"
+        className="absolute right-6 bottom-6 md:right-10 md:bottom-10 w-12 h-12 rounded-none bg-[#9CA3AF] flex items-center justify-center text-black shadow-[4px_4px_0px_0px_rgba(163,163,163,0.5)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] transition-all duration-200 border-2 border-[#9CA3AF] back-to-top-btn"
         whileHover={{ scale: 1.1, y: -3 }}
         whileTap={{ scale: 0.95 }}
         aria-label="Back to top"

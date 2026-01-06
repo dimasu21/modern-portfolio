@@ -53,11 +53,11 @@ span.ql-size-large, span.ql-size-huge {
 
 /* Links */
 .blog-content a {
-  color: #60a5fa;
+  color: #9CA3AF;
   text-decoration: none;
-  border-bottom: 1px solid rgba(96, 165, 250, 0.4);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.5);
 }
-.blog-content a:hover { border-bottom-color: #60a5fa; color: #93c5fd; }
+.blog-content a:hover { border-bottom-color: #9CA3AF; color: #e5e5e5; }
 
 /* Lists */
 .blog-content ul, .blog-content ol {
@@ -102,7 +102,7 @@ span.ql-size-large, span.ql-size-huge {
 /* Horizontal Rule (Divider) */
 .blog-content hr {
   border: 0;
-  height: 1px;
-  background: linear-gradient(to right, transparent, rgba(45, 212, 191, 0.5), transparent); /* Teal Gradient */
+  height: 2px;
+  background: #9CA3AF;
   margin: 2rem 0;
 }

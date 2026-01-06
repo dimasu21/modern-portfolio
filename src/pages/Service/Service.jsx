@@ -21,16 +21,16 @@ export default function Service() {
   }, []);
 
   return (
-    <section className="min-h-screen bg-[#04081A] flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <section className="min-h-screen bg-theme-bg flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       <SEO 
         title="Services" 
         description="Services offered: Web Development, AI Solutions, and UI/UX Design."
       />
       {/* Background */}
-      <GridBackground />
+      {/* <GridBackground /> */}
 
       {/* Ambient Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-gray-800/20 to-gray-900/20 rounded-full blur-[100px]" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-gray-800/20 to-gray-900/20 rounded-full blur-[100px] dark-only" />
 
       <div className="container mx-auto max-w-4xl relative z-10">
         {/* Main Service Card */}
@@ -39,10 +39,10 @@ export default function Service() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="relative rounded-3xl bg-gradient-to-br from-gray-900/90 via-gray-900/80 to-gray-800/70 border border-gray-700/50 p-8 md:p-12 backdrop-blur-xl overflow-hidden"
+          className="relative rounded-3xl bg-theme-card border border-gray-700/50 p-8 md:p-12 backdrop-blur-xl overflow-hidden"
         >
           {/* Subtle gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-gray-700/10 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-gray-700/10 pointer-events-none dark-only" />
 
           <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
             {/* Left Content */}
@@ -53,7 +53,7 @@ export default function Service() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="w-14 h-14 rounded-xl bg-gray-800/80 border border-gray-600/50 flex items-center justify-center mb-6"
+                className="w-14 h-14 rounded-xl bg-theme-card border border-theme-border flex items-center justify-center mb-6"
               >
                 <Monitor className="w-7 h-7 text-gray-300" />
               </motion.div>
@@ -139,7 +139,7 @@ export default function Service() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
               whileHover={{ y: -5, transition: { duration: 0.2 } }}
-              className="group p-6 rounded-2xl bg-gray-900/50 border border-gray-800/50 hover:border-gray-700/50 hover:bg-gray-800/50 transition-all duration-300"
+              className="group p-6 rounded-2xl bg-theme-card border border-gray-800/50 hover:border-gray-700/50 hover:bg-[#252729] transition-all duration-300"
             >
               <item.icon className="w-8 h-8 text-gray-500 group-hover:text-gray-300 transition-colors mb-4" />
               <h3 className="text-lg font-semibold text-white mb-2">{item.title}</h3>

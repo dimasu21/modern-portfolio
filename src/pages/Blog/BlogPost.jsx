@@ -105,7 +105,7 @@ export default function BlogPost() {
 
   if (isLoading) {
     return (
-      <main className="bg-[#020617] text-white min-h-screen pt-32 pb-16">
+      <main className="bg-theme-bg text-white min-h-screen pt-32 pb-16">
         <div className="container mx-auto px-4 max-w-2xl">
           <div className="text-gray-500 animate-pulse">Loading...</div>
         </div>
@@ -115,7 +115,7 @@ export default function BlogPost() {
 
   if (notFound) {
     return (
-      <main className="bg-[#020617] text-white min-h-screen pt-32 pb-16">
+      <main className="bg-theme-bg text-white min-h-screen pt-32 pb-16">
         <div className="container mx-auto px-4 max-w-2xl text-center">
           <div className="text-6xl mb-4">404</div>
           <h1 className="text-2xl font-bold mb-4">Post Not Found</h1>
@@ -132,7 +132,7 @@ export default function BlogPost() {
   }
 
   return (
-    <main className="bg-[#020617] text-white min-h-screen pt-32 pb-24 relative overflow-hidden isolate">
+    <main className="bg-theme-bg text-white min-h-screen pt-32 pb-24 relative overflow-hidden isolate">
       <SEO 
         title={post.title} 
         description={post.excerpt || `Read ${post.title} on Dimas Tri Mulyo's Blog`}
@@ -223,8 +223,8 @@ export default function BlogPost() {
                   onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                   className={`w-10 h-10 flex items-center justify-center rounded-lg border transition-all ${
                     p === currentPage
-                      ? "bg-gradient-to-r from-teal-400 to-blue-500 border-transparent text-white font-bold"
-                      : "bg-gray-900 border-gray-800 text-gray-400 hover:text-teal-400 hover:border-teal-500/50"
+                      ? "bg-gradient-to-r from-white to-white border-transparent text-white font-bold"
+                      : "bg-gray-900 border-gray-800 text-gray-400 hover:text-white hover:border-white/50"
                   }`}
                 >
                   {p}

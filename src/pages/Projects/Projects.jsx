@@ -116,12 +116,12 @@ export default function Projects() {
 
   return (
     <ReactLenis root>
-      <main className="bg-[#04081A] relative" ref={container}>
+      <main className="bg-theme-bg relative" ref={container}>
         <SEO
           title="Projects"
           description="Explore my portfolio of AI engineering and web development projects."
         />
-        <GridBackground />
+        {/* <GridBackground /> */}
         <section className="text-white w-full relative z-10">
           {/* Header Section */}
           <div className="pt-24 text-center pb-2 px-4">
@@ -204,7 +204,7 @@ function Card({
           transition: { duration: 0.3 },
         }}
       >
-        <div className="w-full flex flex-col md:flex-row bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden shadow-2xl group">
+        <div className="w-full flex flex-col md:flex-row bg-theme-card border border-theme-border rounded-2xl overflow-hidden shadow-2xl group">
           {/* Image Section */}
           <div className="w-full md:w-[55%] h-[250px] md:h-[400px] lg:h-[450px] relative overflow-hidden">
             {/* Skeleton Placeholder */}
@@ -237,13 +237,13 @@ function Card({
               whileHover={{ opacity: 0.4 }}
               transition={{ duration: 0.3 }}
             />
-            <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold border border-white/10">
+            <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold border border-white/10 project-badge">
               0{i + 1}
             </div>
           </div>
 
           {/* Content Section */}
-          <div className="w-full md:w-[45%] p-6 md:p-8 lg:p-10 flex flex-col justify-between bg-[#0B1121]">
+          <div className="w-full md:w-[45%] p-6 md:p-8 lg:p-10 flex flex-col justify-between bg-theme-card">
             <div>
               <div className="flex items-center gap-3 mb-4 md:mb-6">
                 <div

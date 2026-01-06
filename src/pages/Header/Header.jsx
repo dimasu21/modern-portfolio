@@ -16,7 +16,7 @@ import {
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
-
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Header() {
   const location = useLocation();
@@ -45,16 +45,16 @@ export default function Header() {
     { id: "home", icon: FaHome, textKey: "nav.home", path: "/" },
     { id: "blog", icon: FaPen, textKey: "nav.blog", path: "/blog" },
     { id: "projects", icon: FaLaptopCode, textKey: "nav.projects", path: "/projects" },
-    { id: "contact", icon: FaEnvelope, textKey: "nav.contact", path: "/contact" },
   ];
 
-  // Dropdown links (Skills, Experience, Certificate, Service, Guestbook)
+  // Dropdown links (Skills, Experience, Certificate, Service, Guestbook, Contact)
   const dropdownLinks = [
     { id: "skills", icon: FaCode, textKey: "nav.skills", path: "/skills" },
     { id: "experience", icon: FaBriefcase, textKey: "nav.experience", path: "/experience" },
     { id: "certificate", icon: FaGraduationCap, textKey: "nav.certificate", path: "/certificate" },
     { id: "service", icon: FaConciergeBell, textKey: "nav.service", path: "/service" },
     { id: "guestbook", icon: FaComments, textKey: "nav.guestbook", path: "/guestbook" },
+    { id: "contact", icon: FaEnvelope, textKey: "nav.contact", path: "/contact" },
   ];
 
   // All links for mobile menu
@@ -76,14 +76,15 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-gray-900/95 backdrop-blur-md md:bg-transparent md:backdrop-blur-none">
       <div className="md:fixed md:top-4 md:left-1/2 md:transform md:-translate-x-1/2 w-full md:w-auto">
-        <div className="p-[2px] md:rounded-full bg-gradient-to-r from-emerald-400 via-cyan-500 to-indigo-500 animate-gradient-x">
-          <nav className="bg-gray-900/90 backdrop-blur-md md:rounded-full px-4 md:px-6 py-2.5">
+        <div className="p-[3px] md:rounded-none bg-[#9CA3AF]">
+          <nav className="bg-theme-bg backdrop-blur-md md:rounded-none px-4 md:px-6 py-2.5">
             {/* Mobile Menu Button */}
             <div className="flex justify-between items-center md:hidden px-2">
               <Link to="/" className="flex items-center gap-2">
                 <span className="text-white font-bold text-lg">Dimas Tri M</span>
               </Link>
               <div className="flex items-center gap-2">
+                <ThemeToggle />
                 <button
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
                   className="text-white p-2"
@@ -106,9 +107,9 @@ export default function Header() {
                     }}
                     className={`px-3 py-2 rounded-lg text-sm font-medium
                       transition-all duration-300 flex items-center gap-2
-                      hover:bg-white/10 
+                      hover:bg-[#9CA3AF]/10 
                       ${activeLink === id
-                        ? "bg-white/15 text-white"
+                        ? "bg-[#9CA3AF]/15 text-white"
                         : "text-gray-300 hover:text-white"
                       }
                     `}
@@ -129,9 +130,9 @@ export default function Header() {
                   onClick={() => setActiveLink("home")}
                   className={`px-3 py-1.5 rounded-full text-sm font-medium
                     transition-all duration-300 flex items-center gap-2
-                    hover:bg-white/10 
+                    hover:bg-[#9CA3AF]/10 
                     ${activeLink === "home"
-                      ? "bg-white/15 text-white"
+                      ? "bg-[#9CA3AF]/15 text-white"
                       : "text-gray-300 hover:text-white"
                     }
                   `}
@@ -146,9 +147,9 @@ export default function Header() {
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                     className={`px-3 py-1.5 rounded-full text-sm font-medium
                       transition-all duration-300 flex items-center gap-2
-                      hover:bg-white/10 
+                      hover:bg-[#9CA3AF]/10 
                       ${isDropdownActive
-                        ? "bg-white/15 text-white"
+                        ? "bg-[#9CA3AF]/15 text-white"
                         : "text-gray-300 hover:text-white"
                       }
                     `}
@@ -160,7 +161,7 @@ export default function Header() {
 
                   {/* Dropdown Menu */}
                   {isDropdownOpen && (
-                    <div className="absolute top-full left-0 mt-2 w-48 py-2 bg-gray-900/95 backdrop-blur-md rounded-xl border border-gray-700/50 shadow-xl">
+                    <div className="absolute top-full left-0 mt-2 w-48 py-2 bg-theme-card rounded-none border-2 border-[#9CA3AF] shadow-[4px_4px_0px_0px_rgba(163,163,163,1)]">
                       {dropdownLinks.map(({ id, icon: Icon, textKey, path }) => (
                         <Link
                           key={id}
@@ -171,14 +172,14 @@ export default function Header() {
                           }}
                           className={`px-4 py-2.5 text-sm font-medium
                             transition-all duration-300 flex items-center gap-3
-                            hover:bg-white/10 
+                            hover:bg-[#9CA3AF]/10 
                             ${activeLink === id
-                              ? "bg-white/10 text-white"
+                              ? "bg-[#9CA3AF]/10 text-white"
                               : "text-gray-300 hover:text-white"
                             }
                           `}
                         >
-                          <Icon className={`text-base ${activeLink === id ? "text-cyan-400" : ""}`} />
+                          <Icon className={`text-base ${activeLink === id ? "text-white" : ""}`} />
                           <span>{t(textKey)}</span>
                         </Link>
                       ))}
@@ -192,9 +193,9 @@ export default function Header() {
                   onClick={() => setActiveLink("blog")}
                   className={`px-3 py-1.5 rounded-full text-sm font-medium
                     transition-all duration-300 flex items-center gap-2
-                    hover:bg-white/10 
+                    hover:bg-[#9CA3AF]/10 
                     ${activeLink === "blog"
-                      ? "bg-white/15 text-white"
+                      ? "bg-[#9CA3AF]/15 text-white"
                       : "text-gray-300 hover:text-white"
                     }
                   `}
@@ -209,9 +210,9 @@ export default function Header() {
                   onClick={() => setActiveLink("projects")}
                   className={`px-3 py-1.5 rounded-full text-sm font-medium
                     transition-all duration-300 flex items-center gap-2
-                    hover:bg-white/10 
+                    hover:bg-[#9CA3AF]/10 
                     ${activeLink === "projects"
-                      ? "bg-white/15 text-white"
+                      ? "bg-[#9CA3AF]/15 text-white"
                       : "text-gray-300 hover:text-white"
                     }
                   `}
@@ -220,27 +221,10 @@ export default function Header() {
                   <span>{t("nav.projects")}</span>
                 </Link>
 
-
-
-                {/* Contact Link */}
-                <Link
-                  to="/contact"
-                  onClick={() => setActiveLink("contact")}
-                  className={`px-3 py-1.5 rounded-full text-sm font-medium
-                    transition-all duration-300 flex items-center gap-2
-                    hover:bg-white/10 
-                    ${activeLink === "contact"
-                      ? "bg-white/15 text-white"
-                      : "text-gray-300 hover:text-white"
-                    }
-                  `}
-                >
-                  <FaEnvelope className={`text-base ${activeLink === "contact" ? "scale-110" : ""}`} />
-                  <span>{t("nav.contact")}</span>
-                </Link>
                 
-                {/* Desktop Language Toggle */}
+                {/* Desktop Language Toggle & Theme Toggle */}
                 <div className="flex items-center gap-2 ml-2 pl-2 border-l border-gray-700/50">
+                  <ThemeToggle />
                   <LanguageSwitcher />
                 </div>
               </div>

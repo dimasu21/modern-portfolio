@@ -113,12 +113,12 @@ export default function Contact() {
   };
 
   return (
-    <main className="pt-20 lg:pt-0 bg-[#04081A] text-white min-h-screen relative overflow-hidden">
+    <main className="pt-20 lg:pt-0 bg-theme-bg text-white min-h-screen relative overflow-hidden">
       <SEO 
         title="Contact" 
         description="Get in touch with Dimas Tri Mulyo for collaboration or inquiries."
       />
-      <GridBackground />
+      {/* <GridBackground /> */}
       <section className="hero min-h-screen flex items-center relative px-4 sm:px-6 lg:px-8 z-10">
         <div className="container mx-auto max-w-6xl">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -135,8 +135,8 @@ export default function Contact() {
 
               <div className="space-y-6">
                 <div className="flex items-center space-x-4 group hover:translate-x-2 transition-transform">
-                  <div className="bg-teal-500/10 p-3 rounded-lg group-hover:bg-teal-500/20 transition-colors">
-                    <Mail className="w-6 h-6 text-teal-400" />
+                  <div className="bg-white/10 p-3 rounded-lg group-hover:bg-white/20 transition-colors">
+                    <Mail className="w-6 h-6 text-white" />
                   </div>
                   <div>
                     <h3 className="font-semibold">Email</h3>
@@ -145,8 +145,8 @@ export default function Contact() {
                 </div>
 
                 <div className="flex items-center space-x-4 group hover:translate-x-2 transition-transform">
-                  <div className="bg-pink-500/10 p-3 rounded-lg group-hover:bg-pink-500/20 transition-colors">
-                    <MapPin className="w-6 h-6 text-pink-400" />
+                  <div className="bg-white/10 p-3 rounded-lg group-hover:bg-white/20 transition-colors">
+                    <MapPin className="w-6 h-6 text-white" />
                   </div>
                   <div>
                     <h3 className="font-semibold">{t("contact.location")}</h3>
@@ -164,8 +164,8 @@ export default function Contact() {
                     <input
                       type="text"
                       placeholder={t("contact.namePlaceholder")}
-                      className={`w-full px-4 py-3 rounded-lg bg-white/5 border ${errors.name ? "border-red-500" : "border-gray-700"
-                        } focus:border-blue-500 focus:outline-none transition-colors text-white placeholder-gray-400`}
+                      className={`w-full px-4 py-3 rounded-lg bg-theme-card border ${errors.name ? "border-red-500" : "border-gray-700"
+                        } focus:border-theme-text focus:outline-none transition-colors text-theme-text placeholder-gray-400`}
                       value={formData.name}
                       onChange={(e) =>
                         setFormData({ ...formData, name: e.target.value })
@@ -184,8 +184,8 @@ export default function Contact() {
                     <input
                       type="email"
                       placeholder={t("contact.emailPlaceholder")}
-                      className={`w-full px-4 py-3 rounded-lg bg-white/5 border ${errors.email ? "border-red-500" : "border-gray-700"
-                        } focus:border-blue-500 focus:outline-none transition-colors text-white placeholder-gray-400`}
+                      className={`w-full px-4 py-3 rounded-lg bg-theme-card border ${errors.email ? "border-red-500" : "border-gray-700"
+                        } focus:border-theme-text focus:outline-none transition-colors text-theme-text placeholder-gray-400`}
                       value={formData.email}
                       onChange={(e) =>
                         setFormData({ ...formData, email: e.target.value })
@@ -205,7 +205,7 @@ export default function Contact() {
                       type="text"
                       placeholder={t("contact.subjectPlaceholder")}
                       className={`w-full px-4 py-3 rounded-lg bg-white/5 border ${errors.subject ? "border-red-500" : "border-gray-700"
-                        } focus:border-blue-500 focus:outline-none transition-colors text-white placeholder-gray-400`}
+                        } focus:border-white focus:outline-none transition-colors text-white placeholder-gray-400`}
                       value={formData.subject}
                       onChange={(e) =>
                         setFormData({ ...formData, subject: e.target.value })
@@ -225,7 +225,7 @@ export default function Contact() {
                       placeholder={t("contact.messagePlaceholder")}
                       rows="4"
                       className={`w-full px-4 py-3 rounded-lg bg-white/5 border ${errors.message ? "border-red-500" : "border-gray-700"
-                        } focus:border-blue-500 focus:outline-none transition-colors resize-none text-white placeholder-gray-400`}
+                        } focus:border-white focus:outline-none transition-colors resize-none text-white placeholder-gray-400`}
                       value={formData.message}
                       onChange={(e) =>
                         setFormData({ ...formData, message: e.target.value })
@@ -244,7 +244,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-blue-500 to-teal-500 text-white py-3 px-6 rounded-lg font-semibold flex items-center justify-center space-x-2 hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-white text-black py-3 px-6 rounded-lg font-semibold flex items-center justify-center space-x-2 hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <span>{isSubmitting ? t("contact.sending") : t("contact.send")}</span>
                   <Send className="w-4 h-4" />

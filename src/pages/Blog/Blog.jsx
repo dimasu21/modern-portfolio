@@ -67,7 +67,7 @@ export default function Blog() {
   };
 
   return (
-    <main className="bg-[#020617] text-white min-h-screen pt-32 md:pt-40 pb-16 border-0">
+    <main className="bg-theme-bg text-white min-h-screen pt-32 md:pt-40 pb-16 border-0">
       <SEO 
         title="Blog" 
         description="Thoughts, tutorials, and insights on AI Engineering and Web Development."
@@ -96,7 +96,7 @@ export default function Blog() {
             href="https://saweria.co/dimasu"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center mt-6 px-4 py-2 bg-blue-900 text-white text-xs font-bold rounded border border-white shadow-[3px_3px_0px_0px_rgba(255,255,255,1)] hover:shadow-[1px_1px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-150"
+            className="inline-flex items-center mt-6 px-4 py-2 bg-[#101214] text-white text-xs font-bold rounded border border-white shadow-[3px_3px_0px_0px_rgba(255,255,255,1)] hover:shadow-[1px_1px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-150 support-btn"
           >
             Support Me
           </a>
