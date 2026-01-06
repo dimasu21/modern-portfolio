@@ -137,6 +137,9 @@ export default function BlogPost() {
         title={post.title} 
         description={post.excerpt || `Read ${post.title} on Dimas Tri Mulyo's Blog`}
         type="article"
+        keywords={post.tags?.join(", ")}
+        url={window.location.href}
+        image={post.cover_image}
       />
       <article className="container mx-auto px-4 max-w-3xl relative z-10">
         
