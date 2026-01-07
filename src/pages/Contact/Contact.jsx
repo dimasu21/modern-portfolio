@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Send, Mail, MapPin, CheckCircle, AlertCircle } from "lucide-react";
-import GridBackground from "@/components/GridBackground";
 import { useTranslation } from "react-i18next";
 import SEO from "@/components/SEO";
 
@@ -113,7 +112,7 @@ export default function Contact() {
   };
 
   return (
-    <main className="pt-20 lg:pt-0 bg-theme-bg text-white min-h-screen relative overflow-hidden">
+    <main className="pt-20 lg:pt-0 text-white min-h-screen relative overflow-hidden">
       <SEO 
         title="Contact" 
         description="Get in touch with Dimas Tri Mulyo for collaboration or inquiries."

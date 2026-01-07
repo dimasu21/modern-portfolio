@@ -6,14 +6,19 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Smooth scrolling for entire site */
+html {
+  scroll-behavior: smooth;
+}
+
 /* Theme utility classes */
 .dark {
   --theme-bg: #101214;
   --theme-bg-secondary: #181a1c;
   --theme-bg-card: #1c1e20;
   --theme-text: #ffffff;
-  --theme-text-muted: #9CA3AF;
-  --theme-accent: #9CA3AF;
+  --theme-text-muted: #eff1f5;
+  --theme-accent: #eff1f5;
   --theme-border: #374151;
 }
 
@@ -173,9 +178,9 @@
 .light .shadow-white\/10 { box-shadow: 0 4px 6px -1px rgba(16,18,20,0.1) !important; }
 .light .bg-\[\#1c1e20\] { background-color: #ffffff !important; }
 .light .bg-\[\#181a1c\] { background-color: #e5e7eb !important; }
-.light .border-\[\#9CA3AF\] { border-color: #101214 !important; }
-.light .text-\[\#9CA3AF\] { color: #4b5563 !important; }
-.light .bg-\[\#9CA3AF\] { background-color: #1f2937 !important; }
+.light .border-\[\#eff1f5\] { border-color: #101214 !important; }
+.light .text-\[\#eff1f5\] { color: #4b5563 !important; }
+.light .bg-\[\#eff1f5\] { background-color: #1f2937 !important; }
 
 /* Blog Content Fixes - Force Black in Light Mode */
 .light .blog-content { color: #1f2937 !important; } 
@@ -203,8 +208,8 @@
 .light .blog-content .ql-align-center.ql-size-small { color: #6b7280 !important; }
 
 /* Invert Header active link background */
-.light .bg-\[\#9CA3AF\]\/15 { background-color: rgba(31,41,55,0.1) !important; }
-.light .hover\:bg-\[\#9CA3AF\]\/10:hover { background-color: rgba(31,41,55,0.05) !important; }
+.light .bg-\[\#eff1f5\]\/15 { background-color: rgba(31,41,55,0.1) !important; }
+.light .hover\:bg-\[\#eff1f5\]\/10:hover { background-color: rgba(31,41,55,0.05) !important; }
 
 
 /* Invert Green Buttons (GitHub style) */
@@ -314,7 +319,8 @@
   }
   
   h1, h2, h3, h4, h5, h6 {
-    font-family: "Space Grotesk", system-ui, sans-serif;
+    font-family: "League Spartan", system-ui, sans-serif;
+    font-weight: 700;
     letter-spacing: -0.02em;
   }
   
@@ -349,7 +355,7 @@
   }
 }
 .gradient-text {
-  background: linear-gradient(90deg, #9CA3AF, #a3a3a3, #9CA3AF);
+  background: linear-gradient(90deg, #eff1f5, #a3a3a3, #eff1f5);
   background-size: 200% auto;
   animation: gradient-shift 4s linear infinite;
   -webkit-background-clip: text;
@@ -358,7 +364,7 @@
 }
 .hero-gradient-border {
   position: relative;
-  background: #9CA3AF;
+  background: #eff1f5;
   padding: 1px;
   border-radius: 0.75rem;
 }
@@ -372,7 +378,7 @@
   height: 3px;
   bottom: -4px;
   left: 0;
-  background: #9CA3AF;
+  background: #eff1f5;
   transition: width 0.3s ease;
 }
 .nav-link:hover::after {
@@ -422,7 +428,7 @@
   content: "|";
   animation: blink 1s step-end infinite;
   margin-left: 2px;
-  color: #9CA3AF;
+  color: #eff1f5;
 }
 @keyframes blink {
   from,

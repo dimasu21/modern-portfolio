@@ -3,7 +3,6 @@ import { useTransform, motion, useScroll } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Github, Globe } from "lucide-react";
-import GridBackground from "@/components/GridBackground";
 import { useTranslation } from "react-i18next";
 import SEO from "@/components/SEO";
 
@@ -116,7 +115,7 @@ export default function Projects() {
 
   return (
     <ReactLenis root>
-      <main className="bg-theme-bg relative" ref={container}>
+      <main className="relative" ref={container}>
         <SEO
           title="Projects"
           description="Explore my portfolio of AI engineering and web development projects."

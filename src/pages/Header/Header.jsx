@@ -76,7 +76,7 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-gray-900/95 backdrop-blur-md md:bg-transparent md:backdrop-blur-none">
       <div className="md:fixed md:top-4 md:left-1/2 md:transform md:-translate-x-1/2 w-full md:w-auto">
-        <div className="p-[3px] md:rounded-none bg-[#9CA3AF]">
+        <div className="p-[1px] md:rounded-none bg-[#eff1f5]">
           <nav className="bg-theme-bg backdrop-blur-md md:rounded-none px-4 md:px-6 py-2.5">
             {/* Mobile Menu Button */}
             <div className="flex justify-between items-center md:hidden px-2">
@@ -107,9 +107,9 @@ export default function Header() {
                     }}
                     className={`px-3 py-2 rounded-lg text-sm font-medium
                       transition-all duration-300 flex items-center gap-2
-                      hover:bg-[#9CA3AF]/10 
+                      hover:bg-[#eff1f5]/10 
                       ${activeLink === id
-                        ? "bg-[#9CA3AF]/15 text-white"
+                        ? "bg-[#eff1f5]/15 text-white"
                         : "text-gray-300 hover:text-white"
                       }
                     `}
@@ -130,9 +130,9 @@ export default function Header() {
                   onClick={() => setActiveLink("home")}
                   className={`px-3 py-1.5 rounded-full text-sm font-medium
                     transition-all duration-300 flex items-center gap-2
-                    hover:bg-[#9CA3AF]/10 
+                    hover:bg-[#eff1f5]/10 
                     ${activeLink === "home"
-                      ? "bg-[#9CA3AF]/15 text-white"
+                      ? "bg-[#eff1f5]/15 text-white"
                       : "text-gray-300 hover:text-white"
                     }
                   `}
@@ -147,9 +147,9 @@ export default function Header() {
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                     className={`px-3 py-1.5 rounded-full text-sm font-medium
                       transition-all duration-300 flex items-center gap-2
-                      hover:bg-[#9CA3AF]/10 
+                      hover:bg-[#eff1f5]/10 
                       ${isDropdownActive
-                        ? "bg-[#9CA3AF]/15 text-white"
+                        ? "bg-[#eff1f5]/15 text-white"
                         : "text-gray-300 hover:text-white"
                       }
                     `}
@@ -161,7 +161,7 @@ export default function Header() {
 
                   {/* Dropdown Menu */}
                   {isDropdownOpen && (
-                    <div className="absolute top-full left-0 mt-2 w-48 py-2 bg-theme-card rounded-none border-2 border-[#9CA3AF] shadow-[4px_4px_0px_0px_rgba(163,163,163,1)]">
+                    <div className="absolute top-full left-0 mt-2 w-48 py-2 bg-theme-card rounded-none border-2 border-[#eff1f5] shadow-[4px_4px_0px_0px_rgba(239,241,245,1)]">
                       {dropdownLinks.map(({ id, icon: Icon, textKey, path }) => (
                         <Link
                           key={id}
@@ -172,9 +172,9 @@ export default function Header() {
                           }}
                           className={`px-4 py-2.5 text-sm font-medium
                             transition-all duration-300 flex items-center gap-3
-                            hover:bg-[#9CA3AF]/10 
+                            hover:bg-[#eff1f5]/10 
                             ${activeLink === id
-                              ? "bg-[#9CA3AF]/10 text-white"
+                              ? "bg-[#eff1f5]/10 text-white"
                               : "text-gray-300 hover:text-white"
                             }
                           `}
@@ -193,9 +193,9 @@ export default function Header() {
                   onClick={() => setActiveLink("blog")}
                   className={`px-3 py-1.5 rounded-full text-sm font-medium
                     transition-all duration-300 flex items-center gap-2
-                    hover:bg-[#9CA3AF]/10 
+                    hover:bg-[#eff1f5]/10 
                     ${activeLink === "blog"
-                      ? "bg-[#9CA3AF]/15 text-white"
+                      ? "bg-[#eff1f5]/15 text-white"
                       : "text-gray-300 hover:text-white"
                     }
                   `}
@@ -210,9 +210,9 @@ export default function Header() {
                   onClick={() => setActiveLink("projects")}
                   className={`px-3 py-1.5 rounded-full text-sm font-medium
                     transition-all duration-300 flex items-center gap-2
-                    hover:bg-[#9CA3AF]/10 
+                    hover:bg-[#eff1f5]/10 
                     ${activeLink === "projects"
-                      ? "bg-[#9CA3AF]/15 text-white"
+                      ? "bg-[#eff1f5]/15 text-white"
                       : "text-gray-300 hover:text-white"
                     }
                   `}

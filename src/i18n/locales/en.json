@@ -197,5 +197,21 @@
   },
   "github": {
     "title": "GitHub Statistics"
+  },
+  "skillsData": {
+    "js": "yeeting code into the DOM since '95, no cap!",
+    "ts": "JavaScript's overachieving cousin who's always flexing",
+    "html": "the internet's granddad, still bussin' fr fr!",
+    "css": "styling with the ultimate drip, no cap",
+    "react": "Building interactive UIs with components!",
+    "tailwind": "Utility-first CSS framework for rapid UI development!",
+    "nodejs": "JavaScript on the server side!",
+    "git": "Distributed version control system!",
+    "github": "Where the world builds software!",
+    "npm": "Node Package Manager!",
+    "firebase": "Make your app development easier!",
+    "docker": "Accelerate how you build, share, and run applications!",
+    "vercel": "Develop. Preview. Ship.",
+    "Python": "Simple, versatile, and powerful programming language!"
   }
 }

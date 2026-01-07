@@ -11,7 +11,6 @@ import {
   ArrowUpRight, // Icon panah untuk tombol
 } from "lucide-react";
 import { motion } from "framer-motion";
-import GridBackground from "@/components/GridBackground";
 import { useTranslation } from "react-i18next";
 import SEO from "@/components/SEO";
 
@@ -105,16 +104,11 @@ const CertificateSection = () => {
   };
 
   return (
-    <section className="min-h-screen relative overflow-hidden py-20 bg-theme-bg">
+    <section className="min-h-screen relative overflow-hidden py-20">
       <SEO 
         title="Certificates" 
         description="Certifications and achievements in Web Development and AI."
       />
-      {/* Grid Background */}
-      <div className="absolute inset-0 z-0">
-        {/* <GridBackground /> */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-[#0a0a0a] dark-only" />
-      </div>
 
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         <motion.div

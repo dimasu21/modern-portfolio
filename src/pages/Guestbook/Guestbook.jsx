@@ -5,7 +5,6 @@ import { Send, Loader2, Trash2, Shield, LogOut } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/context/AuthContext";
 import { FaGoogle, FaGithub } from "react-icons/fa";
-import GridBackground from "@/components/GridBackground";
 import SEO from "@/components/SEO";
 
 const Guestbook = () => {
@@ -202,16 +201,11 @@ const Guestbook = () => {
   };
 
   return (
-    <section className="min-h-screen relative overflow-hidden py-20 bg-theme-bg">
+    <section className="min-h-screen relative overflow-hidden py-20">
       <SEO 
         title="Guestbook" 
         description="Sign the guestbook and leave a message!"
       />
-      {/* Grid Background */}
-      <div className="absolute inset-0 z-0">
-        {/* <GridBackground /> */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#101214] via-transparent to-[#101214] dark-only" />
-      </div>
 
       {/* Admin Modal - REMOVED (now using database-based admin check) */}
 

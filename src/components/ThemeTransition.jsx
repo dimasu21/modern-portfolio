@@ -12,25 +12,28 @@ const ThemeTransition = () => {
     setTargetTheme(theme);
     setShow(true);
     
-      const timer = setTimeout(() => {
+    // Delay before hiding - smooth transition
+    const timer = setTimeout(() => {
       setShow(false);
-    }, 400); // Faster duration
+    }, 800);
 
     return () => clearTimeout(timer);
   }, [theme]);
 
   // Determine background color for the wipe overlay
-  // If moving to dark, wipe with dark color. If moving to light, wipe with light.
   const bgColor = targetTheme === "dark" ? "#101214" : "#eff1f5";
 
   return (
     <AnimatePresence>
       {show && (
         <motion.div
-          initial={{ clipPath: "circle(0% at 95% 5%)" }}
-          animate={{ clipPath: "circle(150% at 95% 5%)" }}
+          initial={{ clipPath: "circle(0% at calc(100% - 40px) 40px)" }}
+          animate={{ clipPath: "circle(150% at calc(100% - 40px) 40px)" }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
+          transition={{ 
+            duration: 0.6, 
+            ease: [0.25, 0.1, 0.25, 1], // Smooth cubic-bezier
+          }}
           style={{
             position: "fixed",
             top: 0,

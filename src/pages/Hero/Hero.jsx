@@ -2,16 +2,12 @@ import { useState, useEffect, useMemo } from "react";
 import Prism from "prismjs";
 import "prismjs/components/prism-javascript";
 import "@/assets/css/tomorrow.css";
-import Meteors from "@/components/ui/meteors";
 import PortfolioPage from "@/pages/About/About";
 import SparklesText from "@/components/ui/sparkles-text";
 import { FlipWords } from "@/components/ui/flip-words";
-import GridBackground from "@/components/GridBackground";
 import GitHubStats from "@/components/GitHubStats";
 import { useTranslation } from "react-i18next";
 import SEO from "@/components/SEO";
-
-// Grid Background - Replacing the HexagonBackground
 
 
 export default function Hero() {
@@ -111,7 +107,7 @@ const profile = {
 
   return (
     <>
-      <main className="bg-theme-bg text-white min-h-screen relative">
+      <main className="text-white min-h-screen relative">
         {/* <GridBackground /> */}
         <SEO 
           title="Home" 
@@ -122,19 +118,6 @@ const profile = {
           className="hero min-h-screen flex items-center justify-center relative px-4 sm:px-6 lg:px-8 py-10 md:py-16 lg:py-0 pt-24 md:pt-32 hero-section-padding overflow-hidden"
           style={{ paddingTop: "var(--hero-padding-top, 0)" }}
         >
-          <div className="absolute inset-0"></div>
-
-          {/* Choose one of these background options */}
-          {/* <GridBackground /> */}
-
-          {/* Or keep the original backgrounds if you prefer */}
-          {/* <HexagonBackground /> */}
-          {/* <AnimatedGrid /> */}
-          {/* <DotBackground /> */}
-
-          {/* Meteors Effect */}
-          <Meteors number={15} />
-
           {/* Main content container */}
           <div
             className="container mx-auto flex flex-col lg:flex-row items-center justify-between relative z-10 py-8 md:py-10 lg:py-12 md:pt-28 xl:pt-28"
@@ -150,9 +133,6 @@ const profile = {
           >
             {/* Left column - Text content */}
             <div className="w-full lg:w-1/2 mb-12 lg:mb-0 animate__animated animate__fadeInLeft relative">
-              {/* Decorative blurs - STRICTLY HIDDEN ON MOBILE */}
-              <div className="absolute hidden lg:block -top-20 -left-20 w-48 h-48 lg:w-64 lg:h-64 bg-white/5 rounded-full blur-3xl dark-only pointer-events-none"></div>
-              <div className="absolute hidden lg:block top-40 -right-20 w-48 h-48 lg:w-64 lg:h-64 bg-white/5 rounded-full blur-3xl dark-only pointer-events-none"></div>
 
 
 
@@ -168,11 +148,10 @@ const profile = {
                     </span>
                   </span>
                 </h1>
-                <div className="absolute -z-10 top-1/2 -translate-y-1/2 left-1/4 w-24 sm:w-32 h-24 sm:h-32 bg-white/10 rounded-full blur-2xl animate-pulse dark-only"></div>
               </div>
 
               {/* Role badge */}
-              <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 rounded-none bg-transparent border-2 border-gray-400 mb-6 sm:mb-8 animate__animated animate__fadeInUp animate__delay-1s shadow-[4px_4px_0px_0px_rgba(163,163,163,1)] hero-badge">
+              <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 rounded-none bg-transparent border-2 border-black dark:border-gray-400 mb-6 sm:mb-8 animate__animated animate__fadeInUp animate__delay-1s shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(239,241,245,1)] hero-badge">
                 <i className="fas fa-rocket text-white animate-bounce text-sm sm:text-base"></i>
                 <span>
                   <FlipWords
@@ -199,7 +178,7 @@ const profile = {
                   href="https://github.com/dimasu21"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative inline-flex items-center justify-center bg-white text-black px-6 py-3 rounded-none font-bold transition-all duration-200 hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none shadow-[4px_4px_0px_0px_rgba(163,163,163,1)] border-2 border-[#9CA3AF]"
+                  className="group relative inline-flex items-center justify-center bg-white text-black px-6 py-3 rounded-none font-bold transition-all duration-200 hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_#374151] border-2 border-black dark:border-white"
                 >
                   <span className="relative flex items-center justify-center gap-2 text-sm font-bold">
                     <span>{t("hero.learnMore")}</span>
@@ -212,30 +191,13 @@ const profile = {
                   href="https://drive.google.com/file/d/1u_X0btJUl9Iq3NvMjADS5Dw2kNCFHNWh/view?usp=sharing"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative inline-flex items-center justify-center bg-transparent text-white px-6 py-3 rounded-none font-bold transition-all duration-200 hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none shadow-[4px_4px_0px_0px_rgba(163,163,163,1)] border-2 border-[#9CA3AF]"
+                  className="group relative inline-flex items-center justify-center bg-transparent text-black dark:text-white px-6 py-3 rounded-none font-bold transition-all duration-200 hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_#374151] border-2 border-black dark:border-white"
                 >
                   <span className="relative flex items-center justify-center gap-2 text-sm font-bold">
                     <span>{t("hero.hireMe")}</span>
                     <i className="fas fa-envelope text-xs transform transition-all duration-300 group-hover:rotate-12"></i>
                   </span>
                 </a>
-              </div>
-
-              {/* Floating badges */}
-              <div className="hidden lg:block absolute left-[5.5rem] top-[2.3rem] animate-float-slow dark-only">
-                <div className="px-4 py-2 rounded-lg bg-teal-500/10 backdrop-blur-sm border border-teal-500/20 text-teal-400">
-                  <i className="fas fa-wand-magic-sparkles"></i>&nbsp;&nbsp;{t("hero.uiMagic")}
-                </div>
-              </div>
-              <div className="hidden lg:block absolute right-10 top-20 animate-float dark-only">
-                <div className="px-4 py-2 rounded-lg bg-blue-500/10 backdrop-blur-sm border border-blue-500/20 text-blue-400">
-                  <i className="fas fa-code"></i>&nbsp;&nbsp;{t("hero.cleanCode")}
-                </div>
-              </div>
-              <div className="hidden lg:block absolute top-[17rem] left-[70%] transform -translate-x-1/2 animate-float dark-only">
-                <div className="px-4 py-2 rounded-lg bg-amber-500/10 backdrop-blur-sm border border-amber-500/20 text-amber-400">
-                  <i className="fas fa-lightbulb"></i>&nbsp;&nbsp;{t("hero.innovation")}
-                </div>
               </div>
             </div>
 
@@ -255,9 +217,6 @@ const profile = {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="absolute inset-0 z-0 pointer-events-none dark-only">
-            <div className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] bg-[radial-gradient(circle_at_center,#1d2333_0,transparent_25%)]"></div>
           </div>
           {/* Scroll indicator - Moved inside section */}
         <div className="absolute bottom-8 left-0 right-0 flex justify-center animate-bounce">

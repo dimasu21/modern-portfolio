@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Monitor, Smartphone, Brain, Palette } from "lucide-react";
-import GridBackground from "@/components/GridBackground";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import SEO from "@/components/SEO";
@@ -21,7 +20,7 @@ export default function Service() {
   }, []);
 
   return (
-    <section className="min-h-screen bg-theme-bg flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <section className="min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       <SEO 
         title="Services" 
         description="Services offered: Web Development, AI Solutions, and UI/UX Design."

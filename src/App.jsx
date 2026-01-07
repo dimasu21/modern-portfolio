@@ -8,6 +8,9 @@ import { Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import ThemeTransition from "./components/ThemeTransition";
+// Global space theme
+import StarsBackground from "./components/StarsBackground";
+import CursorTrail from "./components/CursorTrail";
 
 import Hero from "./pages/Hero/Hero";
 // Lazy load pages for code splitting (reduces initial bundle size)
@@ -57,7 +60,10 @@ export default function App() {
           <div 
             className={`min-h-screen bg-theme-bg transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
           >
-          {/* <CursorTrail /> */}
+          {/* Global Space Theme Background */}
+          <StarsBackground />
+          <CursorTrail />
+          
           <Header />
         <Suspense fallback={<PageLoader />}>
           {isOnePage ? (

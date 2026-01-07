@@ -197,5 +197,21 @@
   },
   "github": {
     "title": "Statistik GitHub"
+  },
+  "skillsData": {
+    "js": "Nge-code ke DOM sejak '95, no cap!",
+    "ts": "Sepupu JavaScript yang ambish dan suka pamer",
+    "html": "Kakek moyang internet, tapi masih menyala abangku!",
+    "css": "Ngasih style dengan drip maksimal, no debat",
+    "react": "Membangun UI interaktif dengan komponen!",
+    "tailwind": "Framework CSS utility-first untuk dev UI sat-set!",
+    "nodejs": "JavaScript di sisi server!",
+    "git": "Sistem kontrol versi terdistribusi!",
+    "github": "Tempat dunia membangun perangkat lunak!",
+    "npm": "Manajer Paket Node!",
+    "firebase": "Bikin pengembangan aplikasi jadi lebih gampang!",
+    "docker": "Percepat cara kamu bangun, bagi, dan jalanin aplikasi!",
+    "vercel": "Develop. Preview. Ship.",
+    "Python": "Bahasa pemrograman simpel, serbaguna, dan powerful!"
   }
 }
