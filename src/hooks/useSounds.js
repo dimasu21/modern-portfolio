@@ -54,7 +54,7 @@ export const useSounds = () => {
       source.detune.value = baseDetune + (Math.random() * 200) - 100;
 
       const gainNode = ctx.createGain();
-      gainNode.gain.value = 3.0;
+      gainNode.gain.value = 8.0;
 
       source.connect(gainNode);
       gainNode.connect(ctx.destination);
