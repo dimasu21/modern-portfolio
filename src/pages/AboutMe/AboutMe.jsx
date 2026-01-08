@@ -2,12 +2,19 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import SEO from "@/components/SEO";
 import StarsBackground from "@/components/StarsBackground";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 // Lazy load Spline to improve performance
 const Spline = React.lazy(() => import('@splinetool/react-spline'));
 
 const AboutMe = () => {
   const { t } = useTranslation();
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
+  // Choose Spline scene based on device
+  const splineScene = isMobile 
+    ? "/models/about-me-mobile.spline" 
+    : "/models/about-me-desktop.spline";
 
   return (
     <div className="relative min-h-screen pt-32 pb-20 overflow-hidden">
@@ -32,8 +39,8 @@ const AboutMe = () => {
 
       </div>
 
-      {/* Spline Design - Full Width & Taller */}
-      <div className="w-full h-[85vh] relative z-10">
+      {/* Spline Design - Responsive Height */}
+      <div className={`w-full relative z-10 ${isMobile ? 'h-[70vh]' : 'h-[85vh]'}`}>
           <React.Suspense fallback={
             <div className="w-full h-full flex items-center justify-center text-gray-500 gap-2">
               <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
@@ -41,7 +48,7 @@ const AboutMe = () => {
             </div>
           }>
             <Spline 
-              scene="/models/about-me.spline" 
+              scene={splineScene} 
               className="w-full h-full"
               style={{ imageRendering: 'crisp-edges' }}
             />
