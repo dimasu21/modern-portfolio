@@ -67,8 +67,8 @@ src/
 
 ```bash
 # Clone the repository
-git clone https://github.com/DimasTriM/modern-portfolio.git
-cd modern-portfolio
+git clone https://github.com/DimasTriM/portfolio.git
+cd portfolio
 
 # Install dependencies
 npm install
