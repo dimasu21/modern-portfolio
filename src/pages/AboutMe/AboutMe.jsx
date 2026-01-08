@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import SEO from "@/components/SEO";
-import StarsBackground from "@/components/StarsBackground";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 // Lazy load Spline to improve performance
@@ -36,12 +35,7 @@ const AboutMe = () => {
         description="Learn more about my journey and passion for technology."
       />
 
-      {/* Background - Hidden on mobile for performance */}
-      {!isMobile && (
-        <div className="fixed inset-0 z-0">
-           <StarsBackground />
-        </div>
-      )}
+      {/* Background now handled globally in App.jsx */}
 
       <div className="container mx-auto px-6 relative z-10">
         

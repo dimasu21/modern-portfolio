@@ -4,7 +4,7 @@ import Header from "./pages/Header/Header";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import ErrorBoundary from "./components/ErrorBoundary";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import ThemeTransition from "./components/ThemeTransition";
@@ -12,6 +12,15 @@ import ThemeTransition from "./components/ThemeTransition";
 import StarsBackground from "./components/StarsBackground";
 import CursorTrail from "./components/CursorTrail";
 import { useMediaQuery } from "./hooks/useMediaQuery";
+
+// Wrapper to hide stars on mobile for /about and /skills
+const StarsBackgroundWrapper = ({ isMobile }) => {
+  const location = useLocation();
+  const hideOnMobile = isMobile && (location.pathname === "/about" || location.pathname === "/skills");
+  
+  if (hideOnMobile) return null;
+  return <StarsBackground />;
+};
 
 import Hero from "./pages/Hero/Hero";
 // Helper for lazy loading with retry (fixes "Failed to load module script" / ChunkLoadError)
@@ -84,8 +93,8 @@ export default function App() {
           <div 
             className={`min-h-screen bg-theme-bg transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
           >
-          {/* Global Space Theme Background */}
-          <StarsBackground />
+          {/* Global Space Theme Background - Hidden on mobile for /about and /skills */}
+          <StarsBackgroundWrapper isMobile={isMobile} />
           {!isMobile && <CursorTrail />}
           
           <Header />
