@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef } from "react";
+import { useMediaQuery } from "./useMediaQuery";
 
 export const useSounds = () => {
   const audioContextRef = useRef(null);
@@ -41,6 +42,8 @@ export const useSounds = () => {
     }
     return audioContextRef.current;
   }, []);
+  
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const playSoundBuffer = useCallback((buffer, baseDetune = 0) => {
     try {
@@ -54,7 +57,9 @@ export const useSounds = () => {
       source.detune.value = baseDetune + (Math.random() * 200) - 100;
 
       const gainNode = ctx.createGain();
-      gainNode.gain.value = 8.0;
+      // Mobile needs much higher gain (8.0) because of small speakers
+      // Desktop uses standard gain (0.4) to prevent ear-blasting
+      gainNode.gain.value = isMobile ? 8.0 : 0.4;
 
       source.connect(gainNode);
       gainNode.connect(ctx.destination);
