@@ -120,7 +120,7 @@ const SplineKeyboard = () => {
 
   // Idle Animation Loop (Floating Effect for BOTH Keyboard and Text)
   useEffect(() => {
-    if (!splineApp || !isLoaded) return;
+    if (!splineApp || !isLoaded || isMobile) return;
     
     const timer = setTimeout(() => {
         const kbd = splineApp.findObjectByName("keyboard");
@@ -240,7 +240,7 @@ const SplineKeyboard = () => {
   };
 
   return (
-    <div className="relative w-full h-[450px] md:h-[700px] flex items-center justify-center overflow-visible touch-none"> 
+    <div className="relative w-full h-[450px] md:h-[700px] flex items-center justify-center overflow-visible touch-pan-y"> 
       {/* Added touch-none to prevent scrolling interference */}
       {/* Loading State */}
       {!isLoaded && (
