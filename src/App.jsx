@@ -14,19 +14,40 @@ import CursorTrail from "./components/CursorTrail";
 import { useMediaQuery } from "./hooks/useMediaQuery";
 
 import Hero from "./pages/Hero/Hero";
+// Helper for lazy loading with retry (fixes "Failed to load module script" / ChunkLoadError)
+const lazyWithRetry = (componentImport) =>
+  lazy(async () => {
+    const pageHasAlreadyBeenForceRefreshed = JSON.parse(
+      window.sessionStorage.getItem("page-has-been-force-refreshed") || "false"
+    );
+
+    try {
+      const component = await componentImport();
+      window.sessionStorage.setItem("page-has-been-force-refreshed", "false");
+      return component;
+    } catch (error) {
+      if (!pageHasAlreadyBeenForceRefreshed) {
+        // Assuming that the user is not defined in the version, we force a refresh
+        window.sessionStorage.setItem("page-has-been-force-refreshed", "true");
+        window.location.reload(); 
+      }
+      throw error; // Let ErrorBoundary handle it if reload didn't work
+    }
+  });
+
 // Lazy load pages for code splitting (reduces initial bundle size)
 // const Hero = lazy(() => import("./pages/Hero/Hero"));
-const Blog = lazy(() => import("./pages/Blog/Blog"));
-const BlogPost = lazy(() => import("./pages/Blog/BlogPost"));
-const BlogAdmin = lazy(() => import("./pages/BlogAdmin/BlogAdmin"));
-const Skills = lazy(() => import("./pages/Skills/Skills"));
-const AboutMe = lazy(() => import("./pages/AboutMe/AboutMe"));
-const Certificate = lazy(() => import("./pages/Certificate/Certificate"));
-const Contact = lazy(() => import("./pages/Contact/Contact"));
-const Projects = lazy(() => import("./pages/Projects/Projects"));
-const Guestbook = lazy(() => import("./pages/Guestbook/Guestbook"));
-const PrivacyPage = lazy(() => import("./pages/Legal/PrivacyPage"));
-const Disclaimer = lazy(() => import("./pages/Legal/Disclaimer"));
+const Blog = lazyWithRetry(() => import("./pages/Blog/Blog"));
+const BlogPost = lazyWithRetry(() => import("./pages/Blog/BlogPost"));
+const BlogAdmin = lazyWithRetry(() => import("./pages/BlogAdmin/BlogAdmin"));
+const Skills = lazyWithRetry(() => import("./pages/Skills/Skills"));
+const AboutMe = lazyWithRetry(() => import("./pages/AboutMe/AboutMe"));
+const Certificate = lazyWithRetry(() => import("./pages/Certificate/Certificate"));
+const Contact = lazyWithRetry(() => import("./pages/Contact/Contact"));
+const Projects = lazyWithRetry(() => import("./pages/Projects/Projects"));
+const Guestbook = lazyWithRetry(() => import("./pages/Guestbook/Guestbook"));
+const PrivacyPage = lazyWithRetry(() => import("./pages/Legal/PrivacyPage"));
+const Disclaimer = lazyWithRetry(() => import("./pages/Legal/Disclaimer"));
 
 // Loading fallback component
 const PageLoader = () => (
