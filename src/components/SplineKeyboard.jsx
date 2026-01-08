@@ -253,9 +253,9 @@ const SplineKeyboard = () => {
       .map(key => Object.values(SKILLS).find(s => s.name === key))
       .filter(Boolean);
       
-    // Append any remaining skills that might have been missed (like TS, Firebase) to avoid them being unreachable
-    const remainingSkills = Object.values(SKILLS).filter(s => !orderedKeys.includes(s.name));
-    skillsArray.push(...remainingSkills);
+    // REMOVED: No longer appending remaining skills to prevent unwanted items (TS, Firebase) from cycling
+    // const remainingSkills = Object.values(SKILLS).filter(s => !orderedKeys.includes(s.name));
+    // skillsArray.push(...remainingSkills);
 
     let currentIndex = 0;
 

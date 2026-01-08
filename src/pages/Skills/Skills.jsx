@@ -28,7 +28,7 @@ const SkillsSection = () => {
           >
             Tech Stack
           </h1>
-          <p className={`${isDarkMode ? 'text-gray-400' : 'text-gray-600'} text-lg max-w-2xl mx-auto`}>
+          <p className={`hidden md:block ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} text-lg max-w-2xl mx-auto`}>
              Hover keys to see details of my technical expertise.
           </p>
         </div>
