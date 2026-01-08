@@ -271,7 +271,7 @@ const Guestbook = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="space-y-6 mb-8"
+          className="space-y-6 mb-8 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar"
         >
           {isLoading ? (
             <div className="flex flex-col items-center justify-center py-16 bg-theme-card rounded-2xl border border-gray-800">
