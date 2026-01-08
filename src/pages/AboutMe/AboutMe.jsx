@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import SEO from "@/components/SEO";
 import StarsBackground from "@/components/StarsBackground";
@@ -10,6 +10,19 @@ const Spline = React.lazy(() => import('@splinetool/react-spline'));
 const AboutMe = () => {
   const { t } = useTranslation();
   const isMobile = useMediaQuery("(max-width: 768px)");
+  const [shouldLoadSpline, setShouldLoadSpline] = useState(!isMobile);
+
+  // Delay Spline loading on mobile to prevent crash
+  useEffect(() => {
+    if (isMobile) {
+      const timer = setTimeout(() => {
+        setShouldLoadSpline(true);
+      }, 800); // Wait 800ms for page to settle
+      return () => clearTimeout(timer);
+    } else {
+      setShouldLoadSpline(true);
+    }
+  }, [isMobile]);
 
   // Choose Spline scene based on device
   const splineScene = isMobile 
@@ -41,18 +54,24 @@ const AboutMe = () => {
 
       {/* Spline Design - Responsive Height */}
       <div className={`w-full relative z-10 ${isMobile ? 'h-[70vh]' : 'h-[85vh]'}`}>
-          <React.Suspense fallback={
-            <div className="w-full h-full flex items-center justify-center text-gray-500 gap-2">
-              <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
-              Loading 3D Scene...
+          {shouldLoadSpline ? (
+            <React.Suspense fallback={
+              <div className="w-full h-full flex items-center justify-center text-gray-500 gap-2">
+                <div className="w-6 h-6 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                <span className="text-sm">Loading 3D Scene...</span>
+              </div>
+            }>
+              <Spline 
+                scene={splineScene} 
+                className="w-full h-full"
+              />
+            </React.Suspense>
+          ) : (
+            <div className="w-full h-full flex flex-col items-center justify-center text-gray-400 gap-3">
+              <div className="w-8 h-8 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+              <span className="text-sm">Preparing 3D Experience...</span>
             </div>
-          }>
-            <Spline 
-              scene={splineScene} 
-              className="w-full h-full"
-              style={{ imageRendering: 'crisp-edges' }}
-            />
-          </React.Suspense>
+          )}
       </div>
     </div>
   );
