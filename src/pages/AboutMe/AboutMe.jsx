@@ -36,10 +36,12 @@ const AboutMe = () => {
         description="Learn more about my journey and passion for technology."
       />
 
-      {/* Background - Consistent with other pages */}
-      <div className="fixed inset-0 z-0">
-         <StarsBackground />
-      </div>
+      {/* Background - Hidden on mobile for performance */}
+      {!isMobile && (
+        <div className="fixed inset-0 z-0">
+           <StarsBackground />
+        </div>
+      )}
 
       <div className="container mx-auto px-6 relative z-10">
         

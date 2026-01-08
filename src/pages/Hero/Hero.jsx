@@ -8,10 +8,12 @@ import { FlipWords } from "@/components/ui/flip-words";
 import GitHubStats from "@/components/GitHubStats";
 import { useTranslation } from "react-i18next";
 import SEO from "@/components/SEO";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 
 export default function Hero() {
   const { t, i18n } = useTranslation();
+  const isMobile = useMediaQuery("(max-width: 768px)");
   
   // Memoize words array to prevent unnecessary re-renders and ensure proper language switch
   const words = useMemo(() => [
@@ -173,16 +175,18 @@ const profile = {
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 animate__animated animate__fadeInUp animate__delay-2s">
-                {/* View Projects Button */}
-                <a
-                  href="/about"
-                  className="group relative inline-flex items-center justify-center bg-white text-black px-6 py-3 rounded-none font-bold transition-all duration-200 hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_#374151] border-2 border-black dark:border-white"
-                >
-                  <span className="relative flex items-center justify-center gap-2 text-sm font-bold">
-                    <span>{t("hero.curious")}</span>
-                    <i className="fas fa-arrow-right text-xs transform transition-all duration-300 group-hover:translate-x-1"></i>
-                  </span>
-                </a>
+                {/* View Projects Button - Hidden on Mobile */}
+                {!isMobile && (
+                  <a
+                    href="/about"
+                    className="group relative inline-flex items-center justify-center bg-white text-black px-6 py-3 rounded-none font-bold transition-all duration-200 hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_#374151] border-2 border-black dark:border-white"
+                  >
+                    <span className="relative flex items-center justify-center gap-2 text-sm font-bold">
+                      <span>{t("hero.curious")}</span>
+                      <i className="fas fa-arrow-right text-xs transform transition-all duration-300 group-hover:translate-x-1"></i>
+                    </span>
+                  </a>
+                )}
 
                 {/* Contact Button */}
                 <a
