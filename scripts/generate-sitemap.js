@@ -4,8 +4,8 @@ import fs from 'fs';
 import path from 'path';
 
 // Load environment variables or use hardcoded fallbacks (matching src/lib/supabase.js)
-const supabaseUrl = process.env.VITE_SUPABASE_URL || "https://xbqwppphtplntjtbzruk.supabase.co";
-const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhicXdwcHBodHBsbnRqdGJ6cnVrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY5MTE4NzksImV4cCI6MjA4MjQ4Nzg3OX0.clmUoYGNIUIdliGKfg1N4GIZt2l4chHIMNWmBXlfi3M";
+const supabaseUrl = process.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY;
 
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
