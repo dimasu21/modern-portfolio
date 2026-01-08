@@ -7,7 +7,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { ThemeProvider } from "./context/ThemeContext";
-import { ThemeProvider } from "./context/ThemeContext";
+
 import StarsBackground from "./components/StarsBackground";
 import CursorTrail from "./components/CursorTrail";
 import { useMediaQuery } from "./hooks/useMediaQuery";

@@ -25,7 +25,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://dimasu.site/experience</loc>
+    <loc>https://dimasu.site/about</loc>
     <lastmod>2026-01-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -47,12 +47,6 @@
     <lastmod>2026-01-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://dimasu.site/service</loc>
-    <lastmod>2026-01-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://dimasu.site/blog/hilangnya-batas-fiksi-dan-realita-bahaya-laten-menjadikan-fandom-sebagai-identitas-primer-seseorang</loc>
