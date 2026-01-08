@@ -1,7 +1,5 @@
-import React from "react";
-import { useTranslation } from "react-i18next";
-import SEO from "@/components/SEO";
-import StarsBackground from "@/components/StarsBackground";
+// Lazy load Spline to improve performance
+const Spline = React.lazy(() => import('@splinetool/react-spline'));
 
 const AboutMe = () => {
   const { t } = useTranslation();
@@ -27,13 +25,16 @@ const AboutMe = () => {
           </h2>
         </div>
 
-        {/* Content Area - Placeholder for Spline */}
-        <div className="w-full h-[600px] flex items-center justify-center border border-gray-800 rounded-2xl bg-black/20 backdrop-blur-sm">
-           <p className="text-gray-500">Spline Design Placeholder</p>
-           {/* 
-              TODO: Insert Spline Component Here 
-              <Spline scene="YOUR_SPLINE_URL" />
-           */}
+        {/* Spline Design */}
+        <div className="w-full h-[600px] flex items-center justify-center relative">
+           <React.Suspense fallback={
+             <div className="flex items-center justify-center text-gray-500 gap-2">
+                <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                Loading 3D Scene...
+             </div>
+           }>
+              <Spline scene="/models/about-me.spline" className="w-full h-full" />
+           </React.Suspense>
         </div>
 
       </div>
