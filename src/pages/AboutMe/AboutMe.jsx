@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import SEO from "@/components/SEO";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { useTheme } from "@/context/ThemeContext";
 
 // Lazy load Spline to improve performance
 const Spline = React.lazy(() => import('@splinetool/react-spline'));
@@ -10,6 +11,13 @@ const AboutMe = () => {
   const { t } = useTranslation();
   const isMobile = useMediaQuery("(max-width: 768px)");
   const [shouldLoadSpline, setShouldLoadSpline] = useState(!isMobile);
+  const { theme } = useTheme();
+  const isDarkMode = theme === "dark";
+
+  // Force scroll to top on mount to prevent jump bug
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Delay Spline loading on mobile to prevent crash
   useEffect(() => {
@@ -39,9 +47,17 @@ const AboutMe = () => {
 
       <div className="container mx-auto px-6 relative z-10">
         
-        {/* Header */}
+        {/* Header - Gradient like Skills page */}
         <div className="text-center mb-8">
-          <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tight">
+          <h2 
+            className="text-5xl md:text-7xl font-bold tracking-tight font-league-spartan"
+            style={{ 
+              color: isDarkMode ? 'transparent' : '#111314',
+              backgroundImage: isDarkMode ? 'linear-gradient(to right, white, #6b7280)' : 'none',
+              backgroundClip: isDarkMode ? 'text' : 'border-box',
+              WebkitBackgroundClip: isDarkMode ? 'text' : 'border-box'
+            }}
+          >
              {t("nav.aboutMe")}
           </h2>
         </div>
