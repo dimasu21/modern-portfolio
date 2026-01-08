@@ -1,7 +1,7 @@
 # Dimas Tri Mulyo - Portfolio Website
 
 <div align="center">
-  <img src="src/assets/images/3d-keyboard.png" alt="Portfolio Preview" width="800"/>
+  <img src="src/assets/images/home-preview.png" alt="Portfolio Preview" width="800"/>
   
   [![Live Demo](https://img.shields.io/badge/Live-dimasu.site-00C7B7?style=for-the-badge&logo=vercel)](https://dimasu.site)
   [![GitHub](https://img.shields.io/badge/GitHub-dimasu21-181717?style=for-the-badge&logo=github)](https://github.com/dimasu21)
