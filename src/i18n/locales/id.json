@@ -8,7 +8,8 @@
     "projects": "Proyek",
     "service": "Layanan",
     "contact": "Kontak",
-    "guestbook": "Tamu"
+    "guestbook": "Tamu",
+    "aboutMe": "Tentang Saya"
   },
   "blog": {
     "label": "Blog",

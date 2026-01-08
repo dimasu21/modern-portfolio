@@ -8,7 +8,8 @@
     "projects": "Projects",
     "service": "Service",
     "contact": "Contact",
-    "guestbook": "Guest"
+    "guestbook": "Guest",
+    "aboutMe": "About Me"
   },
   "blog": {
     "label": "Blog",

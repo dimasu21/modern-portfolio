@@ -20,11 +20,10 @@ const Blog = lazy(() => import("./pages/Blog/Blog"));
 const BlogPost = lazy(() => import("./pages/Blog/BlogPost"));
 const BlogAdmin = lazy(() => import("./pages/BlogAdmin/BlogAdmin"));
 const Skills = lazy(() => import("./pages/Skills/Skills"));
-const Experience = lazy(() => import("./pages/Experience/Experience"));
+const AboutMe = lazy(() => import("./pages/AboutMe/AboutMe"));
 const Certificate = lazy(() => import("./pages/Certificate/Certificate"));
 const Contact = lazy(() => import("./pages/Contact/Contact"));
 const Projects = lazy(() => import("./pages/Projects/Projects"));
-const Service = lazy(() => import("./pages/Service/Service"));
 const Guestbook = lazy(() => import("./pages/Guestbook/Guestbook"));
 const PrivacyPage = lazy(() => import("./pages/Legal/PrivacyPage"));
 const Disclaimer = lazy(() => import("./pages/Legal/Disclaimer"));
@@ -74,7 +73,7 @@ export default function App() {
             <>
               <Hero />
               <Skills />
-              <Experience />
+              <AboutMe />
               <Certificate />
               <Contact />
             </>
@@ -85,16 +84,16 @@ export default function App() {
               <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/admin/blog" element={<BlogAdmin />} />
               <Route path="/skills" element={<Skills />} />
-              <Route path="/experience" element={<Experience />} />
+              <Route path="/about" element={<AboutMe />} />
               <Route path="/certificate" element={<Certificate />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/projects" element={<Projects />} />
-              <Route path="/service" element={<Service />} />
               <Route path="/guestbook" element={<Guestbook />} />
               <Route path="/privacy" element={<PrivacyPage />} />
               <Route path="/disclaimer" element={<Disclaimer />} />
             </Routes>
           )}
+
         </Suspense>
         <Footer />
         </div>
