@@ -182,7 +182,6 @@ LinkedIn : linkedin.com/in/dimas-tri-mulyo-1283a5392`,
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               className="flex-1 bg-transparent text-white outline-none font-mono caret-green-400"
-              autoFocus
               spellCheck={false}
               autoComplete="off"
             />

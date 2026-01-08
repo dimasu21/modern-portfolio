@@ -178,16 +178,30 @@ const SplineKeyboard = () => {
         .map(skill => app.findObjectByName(skill.name))
         .filter(Boolean);
       
+      // OPTIMIZATION: Mobile gets a simpler, delayed animation to prevent lag during WebGL init
+      const startDelay = isMobile ? 1.5 : 0.5; // Longer wait on mobile
+      
       keycaps.forEach((keycap, idx) => {
-        gsap.fromTo(
-          keycap.position,
-          { y: keycap.position.y + 200 }, 
-          { y: keycap.position.y, duration: 0.5, delay: idx * 0.05, ease: "bounce.out" }
-        );
+        if (isMobile) {
+            // Simple ease-out for mobile (less CPU intensive than bounce)
+            gsap.fromTo(
+               keycap.position,
+               { y: keycap.position.y + 100 }, 
+               { y: keycap.position.y, duration: 0.6, delay: startDelay + (idx * 0.05), ease: "power2.out" }
+            );
+        } else {
+            // Full bounce for desktop
+            gsap.fromTo(
+              keycap.position,
+              { y: keycap.position.y + 200 }, 
+              { y: keycap.position.y, duration: 0.5, delay: startDelay + (idx * 0.05), ease: "bounce.out" }
+            );
+        }
       });
     };
     
-    setTimeout(animateKeycaps, 500);
+    // Trigger animation
+    setTimeout(animateKeycaps, 100);
 
     // Event Listeners
     const onHover = (e) => {
@@ -262,6 +276,9 @@ const SplineKeyboard = () => {
     const interval = setInterval(() => {
       const skill = skillsArray[currentIndex];
       setSelectedSkill(skill);
+
+      // Sound Effect for Mobile Auto-Cycle
+      playPressSound();
 
       // Visual Pop Effect
       const obj = splineApp.findObjectByName(skill.name);
