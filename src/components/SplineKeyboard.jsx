@@ -243,7 +243,20 @@ const SplineKeyboard = () => {
   useEffect(() => {
     if (!isMobile || !isLoaded || !splineApp) return;
 
-    const skillsArray = Object.values(SKILLS);
+    // Custom Order: JS, CSS, HTML, React, Python, Node, Tailwind, Git, GitHub, NPM, Vercel, Docker
+    const orderedKeys = [
+       "js", "css", "html", "react", "Python", "nodejs", "tailwind", "git", "github", "npm", "vercel", "docker"
+    ];
+
+    // Filter SKILLS based on orderedKeys to ensure exact order
+    const skillsArray = orderedKeys
+      .map(key => Object.values(SKILLS).find(s => s.name === key))
+      .filter(Boolean);
+      
+    // Append any remaining skills that might have been missed (like TS, Firebase) to avoid them being unreachable
+    const remainingSkills = Object.values(SKILLS).filter(s => !orderedKeys.includes(s.name));
+    skillsArray.push(...remainingSkills);
+
     let currentIndex = 0;
 
     const interval = setInterval(() => {
