@@ -57,9 +57,9 @@ export const useSounds = () => {
       source.detune.value = baseDetune + (Math.random() * 200) - 100;
 
       const gainNode = ctx.createGain();
-      // Mobile needs much higher gain (8.0) because of small speakers
+      // Mobile needs EXTREMELY high gain (15.0) because of small speakers and low OS volume
       // Desktop uses standard gain (0.4) to prevent ear-blasting
-      gainNode.gain.value = isMobile ? 8.0 : 0.4;
+      gainNode.gain.value = isMobile ? 15.0 : 0.4;
 
       source.connect(gainNode);
       gainNode.connect(ctx.destination);
@@ -68,7 +68,7 @@ export const useSounds = () => {
     } catch (err) {
       console.error(err);
     }
-  }, [getContext]);
+  }, [getContext, isMobile]);
 
   const playPressSound = useCallback(() => {
     playSoundBuffer(pressBufferRef.current);
