@@ -14,20 +14,21 @@ const AboutMe = () => {
   const { theme } = useTheme();
   const isDarkMode = theme === "dark";
 
-  // Force scroll to top BEFORE paint using useLayoutEffect
-  useLayoutEffect(() => {
+  // Force scroll to top on mount
+  useEffect(() => {
     window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
   }, []);
 
-  // Delay Spline loading significantly on mobile to prevent crash and scroll issues
+  // Delay Spline loading slightly on mobile to prevent crash/freeze during transition
   useEffect(() => {
-    const delay = isMobile ? 1500 : 300; // Much longer delay on mobile
-    const timer = setTimeout(() => {
+    if (isMobile) {
+      const timer = setTimeout(() => {
+        setShouldLoadSpline(true);
+      }, 500); // Reduced delay for better UX
+      return () => clearTimeout(timer);
+    } else {
       setShouldLoadSpline(true);
-    }, delay);
-    return () => clearTimeout(timer);
+    }
   }, [isMobile]);
 
   // Choose Spline scene based on device
@@ -63,10 +64,9 @@ const AboutMe = () => {
 
       </div>
 
-      {/* Spline Design - Fixed height, touch-none to prevent scroll interference */}
+      {/* Spline Design - Responsive Height */}
       <div 
-        className={`w-full relative z-10 touch-none ${isMobile ? 'h-[70vh]' : 'h-[85vh]'}`}
-        style={{ touchAction: 'none', overflow: 'hidden' }}
+        className={`w-full relative z-10 ${isMobile ? 'h-[70vh]' : 'h-[85vh]'}`}
       >
           {shouldLoadSpline ? (
             <React.Suspense fallback={
@@ -78,7 +78,6 @@ const AboutMe = () => {
               <Spline 
                 scene={splineScene} 
                 className="w-full h-full"
-                style={{ touchAction: 'none' }}
               />
             </React.Suspense>
           ) : (
